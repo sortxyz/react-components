@@ -49,8 +49,6 @@ const SQLQuery = ({
         
         const {data, errors} = await response.json();
        
-        alert(JSON.stringify(data, null, 2));
-
         // first, check for an error message
         if (data && data.error) {
             setErrorMsg(data.error);
