@@ -1,5 +1,5 @@
 {
-  "name": "@sortxyz/react",
+  "name": "@sortxyz/react-components",
   "version": "0.0.1",
   "description": "React components for Sort",
   "main": "lib/index.js",
@@ -11,6 +11,10 @@
     "build-storybook": "build-storybook",
     "build": "rollup -c",
     "prepublishOnly": "yarn build"
+  },
+  "browser": {
+    "child_process": false,
+    "fs": false
   },
   "np": {
     "publish": false,
@@ -51,8 +55,13 @@
   },
   "dependencies": {
     "axios": "^1.3.5",
+    "child_process": "^1.0.2",
     "classnames": "^2.3.2",
-    "react-data-grid": "^7.0.0-beta.28"
+    "fs": "^0.0.1-security",
+    "net": "^1.0.2",
+    "pusher-js": "^8.0.2",
+    "react-data-grid": "^7.0.0-beta.28",
+    "tls": "^0.0.1"
   },
   "repository": "git@github.com:sortxyz/components.git"
 }

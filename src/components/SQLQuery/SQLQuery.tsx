@@ -35,7 +35,7 @@ const SQLQuery = ({
     }, [query]);
 
     async function executeQuery(): Promise<void> {
-        const response = await fetch("/api/sql", {
+        const response = await fetch('https://api.sort.xyz/v1/queries/run', {
             method: 'POST',
             headers: {
                 'x-api-key': api_key as string,
@@ -49,13 +49,15 @@ const SQLQuery = ({
         
         const {data, errors} = await response.json();
        
+        alert(JSON.stringify(data, null, 2));
+
         // first, check for an error message
         if (data && data.error) {
             setErrorMsg(data.error);
         }
-        else if (data && data.length > 0) {
+        else if (data && data.records && data.records.length > 0) {
             // set columns from first result
-            var keys = Object.keys(data[0]);
+            var keys = Object.keys(data.records[0]);
             let columnsTemp = [];
             for (let i=0; i<keys.length; i++) {
                 columnsTemp.push({ key: keys[i], name: keys[i] });
@@ -63,7 +65,7 @@ const SQLQuery = ({
             setColumns(columnsTemp);
 
             // set rows
-            setRows(data);
+            setRows(data.records);
 
             // reset error message
             setErrorMsg(null);
