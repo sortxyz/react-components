@@ -12,11 +12,17 @@ export interface SQLQueryProps {
      * sort.xyz API key
      */
     api_key: string;
+
+    /**
+     * sort.xyz API key
+     */
+    api_server: string;
   }
 
 const SQLQuery = ({
     query,
-    api_key
+    api_key,
+    api_server = "https://api.sort.xyz"
   }: SQLQueryProps) => {
 
     // Data rows in table
@@ -36,7 +42,7 @@ const SQLQuery = ({
 
     async function executeQuery(): Promise<void> {
         try {
-            const response = await fetch('https://api.sort.xyz/v1/queries/run', {
+            const response = await fetch(api_server + '/v1/queries/run', {
                 method: 'POST',
                 headers: {
                     'x-api-key': api_key as string,
