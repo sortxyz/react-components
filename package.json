@@ -1,6 +1,6 @@
 {
   "name": "@sortxyz/react-components",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "React components for Sort",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -10,7 +10,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "rollup -c",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "prepare": "relative-deps"
   },
   "browser": {
     "child_process": false,
@@ -43,6 +44,7 @@
     "postcss": "^8.4.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "relative-deps": "^1.0.7",
     "rollup": "^2.34.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
@@ -58,10 +60,12 @@
     "child_process": "^1.0.2",
     "classnames": "^2.3.2",
     "fs": "^0.0.1-security",
+    "javascript-time-ago": "^2.5.9",
     "net": "^1.0.2",
     "pusher-js": "^8.0.2",
     "react-data-grid": "^7.0.0-beta.28",
     "tls": "^0.0.1"
   },
-  "repository": "git@github.com:sortxyz/components.git"
+  "repository": "git@github.com:sortxyz/components.git",
+  "relativeDependencies": {}
 }

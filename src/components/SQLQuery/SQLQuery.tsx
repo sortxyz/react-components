@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DataGrid from 'react-data-grid';
 import 'react-data-grid/lib/styles.css';
+import styles from '../styles/global.module.css';
 
 export interface SQLQueryProps {
     /**
@@ -16,13 +17,25 @@ export interface SQLQueryProps {
     /**
      * sort.xyz API key
      */
-    api_server: string;
+    api_server?: string;
+
+    /**
+     * Height of result grid, default to 600px
+     */
+    height?: string;
+
+    /**
+     * CSS theme, light or dark, default to dark
+     */
+    theme?: string
   }
 
 const SQLQuery = ({
     query,
     api_key,
-    api_server = "https://api.sort.xyz"
+    api_server = "https://api.sort.xyz",
+    height = "600px",
+    theme = "dark"
   }: SQLQueryProps) => {
 
     // Data rows in table
@@ -66,7 +79,14 @@ const SQLQuery = ({
                 var keys = Object.keys(data.records[0]);
                 let columnsTemp = [];
                 for (let i=0; i<keys.length; i++) {
-                    columnsTemp.push({ key: keys[i], name: keys[i] });
+                    columnsTemp.push(
+                        { 
+                            key: keys[i], 
+                            name: keys[i],
+                            headerCellClass: styles[theme + "-colSpanClassname"],
+                            cellClass: styles[theme + "-colSpanClassname"]
+                        });
+                    
                 }
                 setColumns(columnsTemp);
 
@@ -107,8 +127,22 @@ const SQLQuery = ({
                 <div style={{textAlign:"center", margin: "20px", fontSize: "18px", color: "red"}}>{errorMsg}</div>
             }
             {!errorMsg &&
-                <DataGrid columns={columns} rows={rows} style={{height:"500px"}} />
+                <DataGrid 
+                    columns={columns} 
+                    rows={rows} 
+                    rowHeight={50}
+                    style={{width: "100%", height:height, border: (theme === 'dark' ? "0px solid white" : "0px solid black"), backgroundColor : "transparent"}} 
+                />
             }
+            
+            <div>
+                <nav className={`${styles[theme + "-view-component"]}`}>
+                <a href="https://docs.sort.xyz/docs/getting-started" target="_blank">
+                &#60; view react component &#62;
+                </a>
+                </nav>
+            </div>
+            
         </div>
     )
 

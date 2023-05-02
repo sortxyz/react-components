@@ -1,0 +1,181 @@
+.main-container {
+    width: 100%;
+}
+
+.summary {
+    
+    margin: 0px 0px 20px 0px;
+}
+
+.light-summary-text {
+    width: 70%;
+    float: left;
+    padding-top: 10px;
+    font-size: 18px;
+    text-align: left;
+    color: #000;
+}
+
+.dark-summary-text {
+    width: 70%;
+    float: left;
+    padding-top: 10px;
+    font-size: 18px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.light-summary-number {
+    color:#000;
+    font-weight: bold;
+}
+.dark-summary-number {
+    color:#fff;
+    font-weight: bold;
+}
+
+.pagination {
+    width: 30%;
+    float: right;
+}
+
+.pagination .container {
+    display: flex;
+    justify-content: right;
+}
+
+.pagination .container .buttons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.pagination .container .buttons .light-left {
+    margin: 0 4px 0 1px;
+    border: 1px solid #000;
+    padding: 0px 15px 4px 15px;
+    font-size: 26px;
+}
+.pagination .container .buttons .dark-left {
+    margin: 0 4px 0 1px;
+    border: 1px solid #FFF;
+    padding: 0px 15px 4px 15px;
+    font-size: 26px;
+}
+
+.pagination .container .buttons .light-right {
+    margin: 0 1px;
+    border: 1px solid #000;
+    padding: 0px 15px;
+    font-size: 26px;
+}
+.pagination .container .buttons .dark-right {
+    margin: 0 1px;
+    border: 1px solid #FFF;
+    padding: 0px 15px;
+    font-size: 26px;
+}
+
+.dark-right a:link, a:visited, a:active {
+    text-decoration: none;
+    color: #fff;
+}
+.light-right a:link, a:visited, a:active {
+    text-decoration: none;
+    color: #000;
+}
+
+.dark-left a:link, a:visited, a:active {
+    text-decoration: none;
+    color: #fff;
+}
+.light-left a:link, a:visited, a:active {
+    text-decoration: none;
+    color: #000;
+}
+
+.dark-view-component, .light-view-component{
+    display: flex;
+    justify-content: right;
+    font-size: 18px;
+} 
+
+.light-view-component a:link, a:visited, a:active {
+    color: #000 !important;
+    margin-top: 20px;
+}
+
+.dark-view-component a:link, a:visited, a:active {
+    color: rgba(255, 255, 255, 0.5) !important;
+    margin-top: 20px;
+}
+
+.light-colSpanClassname {
+    background-color: transparent;
+    color: black !important;
+    text-align: center;
+    border: 0px black;
+    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+}
+
+.dark-colSpanClassname {
+    background-color: transparent;
+    text-align: center;
+    border: 0px black;
+    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+    color: #fff !important;
+  }
+
+
+.light-colSpanClassname  a:link, a:visited, a:active {
+    color: #000;
+}
+
+.dark-colSpanClassname  a:link, a:visited, a:active {
+    color: #fff;
+}
+
+.light-methodSpanClassname {
+    background-color: transparent;
+    color: black;
+    text-align: center;
+    border: 0px black;
+    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+}
+
+.dark-methodSpanClassname {
+    background-color: transparent;
+    text-align: center;
+    border: 0px black;
+    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+    color: #fff;
+    background-color: rgba(87, 92, 103, 0.3);
+}
+  
+.skeleton {
+    animation: skeleton-loading 5s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+0% {
+    background-color: rgba(87, 92, 103, 0.3);
+}
+100% {
+    background-color: rgba(87, 92, 103, 0.3);
+}
+}
+
+.skeleton-text {
+    width: 100%;
+    height: 1.4rem;
+    border-radius: 0.25rem;
+}
+
+.skeleton-text__body {
+    width: 100%;
+}
+
+.skeleton-footer {
+    width: 30%;
+}
