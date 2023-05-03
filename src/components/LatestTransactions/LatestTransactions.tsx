@@ -7,6 +7,7 @@ import en from 'javascript-time-ago/locale/en'
 import styles from "../styles/global.module.css";
 
 
+
 export interface LatestTransactionsProps {
     /**
      * Contract address
@@ -53,7 +54,7 @@ const LatestTransactions = ({
       resizable: true,
       formatter(props: FormatterProps<Row>) { return <a href={'https://etherscan.com/tx/' + props.row.hash} target="_blank">{props.row.hash}</a> },
       cellClass: styles[theme + "-colSpanClassname"],
-      headerCellClass: styles[theme + "-colSpanClassname"]
+      headerCellClass: styles[theme + "-headerCell"]
     },
     { 
       "key" : "method", 
@@ -61,7 +62,7 @@ const LatestTransactions = ({
       "width": "14.2%",
       resizable: true, 
       cellClass(props: FormatterProps<Row>) { return styles[theme + "-methodSpanClassname"] }, 
-      headerCellClass: styles[theme + "-colSpanClassname"]
+      headerCellClass: styles[theme + "-headerCell"]
     },
     { 
       "key" : "type", 
@@ -69,7 +70,7 @@ const LatestTransactions = ({
       "width": "14.2%",
       resizable: true, 
       cellClass: styles[theme + "-colSpanClassname"],
-      headerCellClass: styles[theme + "-colSpanClassname"]
+      headerCellClass: styles[theme + "-headerCell"]
     },
     { 
       "key" : "block", 
@@ -77,7 +78,7 @@ const LatestTransactions = ({
       "width": "14.2%",
       resizable: true,
       cellClass: styles[theme + "-colSpanClassname"],
-      headerCellClass: styles[theme + "-colSpanClassname"] 
+      headerCellClass: styles[theme + "-headerCell"] 
     },
     /*
     { 
@@ -95,7 +96,7 @@ const LatestTransactions = ({
       resizable: true,
       formatter(props: FormatterProps<Row>) { return <a href={'https://etherscan.com/address/' + props.row.from} target="_blank">{props.row.from}</a> },
       cellClass: styles[theme + "-colSpanClassname"],
-      headerCellClass: styles[theme + "-colSpanClassname"] 
+      headerCellClass: styles[theme + "-headerCell"] 
     },
     { 
       "key" : "to", 
@@ -104,7 +105,7 @@ const LatestTransactions = ({
       resizable: true,
       formatter(props: FormatterProps<Row>) { return <a href={'https://etherscan.com/address/' + props.row.to} target="_blank">{props.row.to}</a>},
       cellClass: styles[theme + "-colSpanClassname"],
-      headerCellClass: styles[theme + "-colSpanClassname"]  
+      headerCellClass: styles[theme + "-headerCell"]  
     },
     { 
       "key" : "value", 
@@ -112,7 +113,7 @@ const LatestTransactions = ({
       "width": "14.2%",
       resizable: true,
       cellClass: styles[theme + "-colSpanClassname"],
-      headerCellClass: styles[theme + "-colSpanClassname"] 
+      headerCellClass: styles[theme + "-headerCell"] 
     }
   ];
 
@@ -269,7 +270,7 @@ const LatestTransactions = ({
             </nav>
           </div>
         </div>
-        <br />
+       
         <div style={{width: "100%"}}>
           <DataGrid 
             columns={columns_val} 
@@ -293,19 +294,39 @@ const LatestTransactions = ({
         <div className={`${styles["summary"]}`}>
           <div className={`${styles[theme+"-summary-text"]}`}>
 
-            {offset == 0 && <>
-            Latest <span className={`${styles[theme+"-summary-number"]}`}>25 transactions</span> from a total of <span className={`${styles[theme+"-summary-number"]}`}>{queryCount}</span> transactions
-            </>}
-            {offset > 0 && <>
-            Latest <span className={`${styles[theme+"-summary-number"]}`}>{offset}-{offset+25} transactions</span> from a total of <span className={`${styles[theme+"-summary-number"]}`}>{queryCount}</span> transactions
-            </>}
+            { queryCount < 25 && 
+              <span className={`${styles[theme+"-summary-number"]}`}>Latest transactions</span>
+            }
+
+            { queryCount > 25 && 
+              <>
+                {offset == 0 && <>
+                Latest <span className={`${styles[theme+"-summary-number"]}`}>25 transactions</span> from a total of <span className={`${styles[theme+"-summary-number"]}`}>{queryCount}</span> transactions
+                </>}
+                {offset > 0 && <>
+                Latest <span className={`${styles[theme+"-summary-number"]}`}>{offset}-{offset+25} transactions</span> from a total of <span className={`${styles[theme+"-summary-number"]}`}>{queryCount}</span> transactions
+                </>}
+              </>
+            }
 
           </div>
+          
           <div className={`${styles["pagination"]}`}>
             <nav aria-label="pagination" className={`${styles["container"]}`}>
                 <ul className={`${styles["buttons"]}`}>
-                    <li onClick={() => decreaseOffset()} className={`${styles[theme+"-left"]}`}><a href="#"><span aria-hidden="true">&#x2039;</span></a></li>
-                    <li onClick={() => increaseOffset()} className={`${styles[theme+"-right"]}`}><a href="#"><span aria-hidden="true">&#x203A;</span></a></li>
+                    {offset > 0 && 
+                      <li onClick={() => decreaseOffset()} className={`${styles[theme+"-left"]}`}><a href="#"><span aria-hidden="true">&#x2039;</span></a></li>
+                    }
+                    {offset == 0 && 
+                      <li className={`${styles[theme+"-left-grey"]}`}><span aria-hidden="true">&#x2039;</span></li>
+                    }
+
+                    { queryCount > 25 &&
+                      <li onClick={() => increaseOffset()} className={`${styles[theme+"-right"]}`}><a href="#"><span aria-hidden="true">&#x203A;</span></a></li>
+                    }
+                    { queryCount <= 25 &&
+                      <li className={`${styles[theme+"-right-grey"]}`}><span aria-hidden="true">&#x203A;</span></li>
+                    }
                 </ul>
             </nav>
           </div>

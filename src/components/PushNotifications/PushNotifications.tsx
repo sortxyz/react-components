@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DataGrid from 'react-data-grid';
 import 'react-data-grid/lib/styles.css';
-import styles from '../styles/global.module.css';
+import styles from "../styles/global.module.css";
 
 const Pusher = require('pusher-js');
 
@@ -50,10 +50,10 @@ const PushNotifications = ({
         // Set table columns
         setColumns([
             //{key:"date", name: "date", width: "25%"},
-            {key:"hash", name: "Hash", width: "25%", headerCellClass: styles[theme+"-colSpanClassname"], cellClass: styles[theme+"-colSpanClassname"]},
-            {key:"from", name: "From", width: "25%", headerCellClass: styles[theme+"-colSpanClassname"], cellClass: styles[theme+"-colSpanClassname"]},
-            {key:"to", name: "To", width: "25%", headerCellClass: styles[theme+"-colSpanClassname"], cellClass: styles[theme+"-colSpanClassname"]},
-            {key:"function", name: "Function", width: "25%", headerCellClass: styles[theme+"-colSpanClassname"], cellClass: styles[theme+"-colSpanClassname"]}
+            {key:"hash", name: "Hash", width: "25%", headerCellClass: styles[theme+"-headerCell"], cellClass: styles[theme+"-colSpanClassname"]},
+            {key:"from", name: "From", width: "25%", headerCellClass: styles[theme+"-headerCell"], cellClass: styles[theme+"-colSpanClassname"]},
+            {key:"to", name: "To", width: "25%", headerCellClass: styles[theme+"-headerCell"], cellClass: styles[theme+"-colSpanClassname"]},
+            {key:"function", name: "Function", width: "25%", headerCellClass: styles[theme+"-headerCell"], cellClass: styles[theme+"-colSpanClassname"]}
         ]);
 
         var pusher = new Pusher('ac91a1d4157ccb9e4203', {
@@ -88,7 +88,7 @@ const PushNotifications = ({
                 <DataGrid 
                     columns={columns} 
                     rows={rows} 
-                    style={{width: "100%", height:height,border: (theme === 'dark' ? "0px solid white" : "0px solid black"), backgroundColor : "transparent"}} 
+                    style={{width: "100%", height:height, border: (theme === 'dark' ? "0px solid white" : "0px solid black"), backgroundColor : "transparent"}} 
                     rowHeight={50}
                 />
             </div>}

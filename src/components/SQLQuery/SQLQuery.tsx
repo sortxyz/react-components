@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DataGrid from 'react-data-grid';
 import 'react-data-grid/lib/styles.css';
-import styles from '../styles/global.module.css';
+import styles from "../styles/global.module.css";
 
 export interface SQLQueryProps {
     /**
@@ -83,7 +83,7 @@ const SQLQuery = ({
                         { 
                             key: keys[i], 
                             name: keys[i],
-                            headerCellClass: styles[theme + "-colSpanClassname"],
+                            headerCellClass: styles[theme + "-headerCell"],
                             cellClass: styles[theme + "-colSpanClassname"]
                         });
                     
