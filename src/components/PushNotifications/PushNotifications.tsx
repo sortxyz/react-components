@@ -99,6 +99,8 @@ const PushNotifications = ({
                 </div>
             }
            
+
+           {columns && rows.length > 0 && 
             <div>
                 <nav className={`${styles[theme + "-view-component"]}`}>
                     <a href="https://docs.sort.xyz/docs/push-notifications" target="_blank">
@@ -106,6 +108,7 @@ const PushNotifications = ({
                     </a>
                 </nav>
             </div>
+            }
             
         </div>
     )
