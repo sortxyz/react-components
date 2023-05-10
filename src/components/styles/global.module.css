@@ -56,6 +56,8 @@
     border: 1px solid #000;
     padding: 0px 15px 4px 15px;
     font-size: 26px;
+    color: #000;
+    cursor: pointer;
 }
 
 .pagination .container .buttons .light-left-grey {
@@ -63,6 +65,7 @@
     border: 1px solid grey;
     padding: 0px 15px 4px 15px;
     font-size: 26px;
+    color: grey;
 }
 
 .pagination .container .buttons .dark-left-grey {
@@ -70,6 +73,7 @@
     border: 1px solid grey;
     padding: 0px 15px 4px 15px;
     font-size: 26px;
+    color: grey;
 }
 
 .pagination .container .buttons .dark-left {
@@ -77,6 +81,8 @@
     border: 1px solid #FFF;
     padding: 0px 15px 4px 15px;
     font-size: 26px;
+    color: #fff;
+    cursor: pointer;
 }
 
 .pagination .container .buttons .dark-left-grey {
@@ -84,6 +90,7 @@
     border: 1px solid grey;
     padding: 0px 15px 4px 15px;
     font-size: 26px;
+    color: grey;
 }
 
 .pagination .container .buttons .light-right {
@@ -91,18 +98,23 @@
     border: 1px solid #000;
     padding: 0px 15px;
     font-size: 26px;
+    color: #000;
+    cursor: pointer;
 }
 .pagination .container .buttons .dark-right {
     margin: 0 1px;
     border: 1px solid #FFF;
     padding: 0px 15px;
     font-size: 26px;
+    color: #fff;
+    cursor: pointer;
 }
 .pagination .container .buttons .dark-right-grey {
     margin: 0 1px;
     border: 1px solid grey;
     padding: 0px 15px;
     font-size: 26px;
+    color: grey;
 }
 
 .pagination .container .buttons .light-right-grey {
@@ -110,31 +122,80 @@
     border: 1px solid grey;
     padding: 0px 15px;
     font-size: 26px;
-}
-
-.dark-right-grey a:link, a:visited, a:active {
-    text-decoration: none;
-    color: grey;
-}
-.light-right-grey a:link, a:visited, a:active {
-    text-decoration: none;
     color: grey;
 }
 
-.dark-right a:link, a:visited, a:active {
+.dark-right-grey a:link {
+    text-decoration: none;
+    color: grey;
+}
+.dark-right-grey a:visited {
+    text-decoration: none;
+    color: grey;
+}
+.dark-right-grey a:active {
+    text-decoration: none;
+    color: grey;
+}
+.light-right-grey a:link {
+    text-decoration: none;
+    color: grey;
+}
+.light-right-grey a:visited {
+    text-decoration: none;
+    color: grey;
+}
+.light-right-grey a:active {
+    text-decoration: none;
+    color: grey;
+}
+
+.dark-right a:link {
     text-decoration: none;
     color: #fff;
 }
-.light-right a:link, a:visited, a:active {
+.dark-right a:visited {
+    text-decoration: none;
+    color: #fff;
+}
+.dark-right a:active {
+    text-decoration: none;
+    color: #fff;
+}
+.light-right a:link {
+    text-decoration: none;
+    color: #000 !important;
+}
+.light-right a:visited {
+    text-decoration: none;
+    color: #000 !important;
+}
+.light-right a:active {
     text-decoration: none;
     color: #000 !important;
 }
 
-.dark-left a:link, a:visited, a:active {
+.dark-left a:link {
     text-decoration: none;
     color: #fff;
 }
-.light-left a:link, a:visited, a:active {
+.dark-left a:visited {
+    text-decoration: none;
+    color: #fff;
+}
+.dark-left a:active {
+    text-decoration: none;
+    color: #fff;
+}
+.light-left a:link {
+    text-decoration: none;
+    color: #000;
+}
+.light-left a:visited {
+    text-decoration: none;
+    color: #000;
+}
+.light-left a:active {
     text-decoration: none;
     color: #000;
 }
@@ -145,18 +206,38 @@
     font-size: 18px;
 } 
 
-.light-view-component a:link, a:visited, a:active {
+.light-view-component a:link {
     color: #000 !important;
     margin-top: 20px;
 }
 
-.dark-view-component a:link, a:visited, a:active {
+.light-view-component a:visited {
+    color: #000 !important;
+    margin-top: 20px;
+}
+
+.light-view-component a:active {
+    color: #000 !important;
+    margin-top: 20px;
+}
+
+.dark-view-component a:link {
+    color: rgba(255, 255, 255, 0.5) !important;
+    margin-top: 20px;
+}
+
+.dark-view-component a:visited {
+    color: rgba(255, 255, 255, 0.5) !important;
+    margin-top: 20px;
+}
+
+.dark-view-component a:active {
     color: rgba(255, 255, 255, 0.5) !important;
     margin-top: 20px;
 }
 
 .light-headerCell {
-    background-color: #fff;
+    background-color: #fff !important;
     color: black !important;
     text-align: center;
     border: 0px black;
@@ -188,11 +269,27 @@
   }
 
 
-.light-colSpanClassname  a:link, a:visited, a:active {
+.light-colSpanClassname a:link {
     color: #000;
 }
 
-.dark-colSpanClassname  a:link, a:visited, a:active {
+.light-colSpanClassname a:visited {
+    color: #000;
+}
+
+.light-colSpanClassname a:active {
+    color: #000;
+}
+
+.dark-colSpanClassname a:link {
+    color: #fff;
+}
+
+.dark-colSpanClassname a:visited {
+    color: #fff;
+}
+
+.dark-colSpanClassname a:active {
     color: #fff;
 }
 
@@ -246,4 +343,41 @@
 
 .skeleton-footer {
     width: 30%;
+}
+
+.light-waiting {
+    color: #000;
+    padding-bottom: 10px;
+}
+
+.dark-waiting {
+    color: #fff;
+    padding-bottom: 10px;
+}
+
+.light-waiting-image {
+    background-color: #000;
+    padding: 20px;
+}
+
+.dark-waiting-image {
+    padding: 20px;
+}
+
+.light-no-results {
+    text-align: center;
+    padding: 50px 0px;
+    font-style: italic;
+    background-color: rgba(87, 92, 103, 0.3);
+    margin: 20px 0px;
+    font-size: 18px;
+}
+
+.dark-no-results {
+    text-align: center;
+    padding: 50px 0px;
+    font-style: italic;
+    background-color: rgba(87, 92, 103, 0.3);
+    margin: 20px 0px;
+    font-size: 18px;
 }

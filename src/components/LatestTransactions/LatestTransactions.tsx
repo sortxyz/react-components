@@ -6,8 +6,6 @@ import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import styles from "../styles/global.module.css";
 
-
-
 export interface LatestTransactionsProps {
     /**
      * Contract address
@@ -50,7 +48,7 @@ const LatestTransactions = ({
     { 
       "key" : "hash", 
       "name" : "Hash", 
-      "width": "14.2%",
+      "width": "12.5%",
       resizable: true,
       formatter(props: FormatterProps<Row>) { return <a href={'https://etherscan.com/tx/' + props.row.hash} target="_blank">{props.row.hash}</a> },
       cellClass: styles[theme + "-colSpanClassname"],
@@ -59,7 +57,7 @@ const LatestTransactions = ({
     { 
       "key" : "method", 
       "name" : "Method", 
-      "width": "14.2%",
+      "width": "12.5%",
       resizable: true, 
       cellClass(props: FormatterProps<Row>) { return styles[theme + "-methodSpanClassname"] }, 
       headerCellClass: styles[theme + "-headerCell"]
@@ -67,7 +65,7 @@ const LatestTransactions = ({
     { 
       "key" : "type", 
       "name" : "Type", 
-      "width": "14.2%",
+      "width": "12.5%",
       resizable: true, 
       cellClass: styles[theme + "-colSpanClassname"],
       headerCellClass: styles[theme + "-headerCell"]
@@ -75,12 +73,11 @@ const LatestTransactions = ({
     { 
       "key" : "block", 
       "name" : "Block", 
-      "width": "14.2%",
+      "width": "12.5%",
       resizable: true,
       cellClass: styles[theme + "-colSpanClassname"],
       headerCellClass: styles[theme + "-headerCell"] 
     },
-    /*
     { 
       "key" : "age", 
       "name" : "Age", 
@@ -88,11 +85,11 @@ const LatestTransactions = ({
       resizable: true,
       cellClass: styles[theme + "-colSpanClassname"],
       headerCellClass: styles[theme + "-colSpanClassname"] 
-    },*/
+    },
     { 
       "key" : "from", 
       "name" : "From", 
-      "width": "14.2%",
+      "width": "12.5%",
       resizable: true,
       formatter(props: FormatterProps<Row>) { return <a href={'https://etherscan.com/address/' + props.row.from} target="_blank">{props.row.from}</a> },
       cellClass: styles[theme + "-colSpanClassname"],
@@ -101,7 +98,7 @@ const LatestTransactions = ({
     { 
       "key" : "to", 
       "name" : "To", 
-      "width": "14.2%",
+      "width": "12.5%",
       resizable: true,
       formatter(props: FormatterProps<Row>) { return <a href={'https://etherscan.com/address/' + props.row.to} target="_blank">{props.row.to}</a>},
       cellClass: styles[theme + "-colSpanClassname"],
@@ -110,7 +107,7 @@ const LatestTransactions = ({
     { 
       "key" : "value", 
       "name" : "Value", 
-      "width": "14.2%",
+      "width": "12.5%",
       resizable: true,
       cellClass: styles[theme + "-colSpanClassname"],
       headerCellClass: styles[theme + "-headerCell"] 
@@ -179,7 +176,7 @@ const LatestTransactions = ({
     async function executeQuery(): Promise<void> {
       try {
           setLoadingSql(true);
-          let query = "select transaction_hash as hash, function as method, b.block_number, b.timestamp, t.from_address, t.to_address, value from ethereum.transaction t, ethereum.block b where to_address = '"+contract_address.toLowerCase()+"' and t.block_id = b.id order by b.block_number desc limit 25 offset " + offset;
+          let query = "select transaction_hash as hash, function as method, b.block_number, b.timestamp, t.from_address, t.to_address, t.value / 1e18 as value from ethereum.transaction t, ethereum.block b where to_address = '"+contract_address.toLowerCase()+"' and t.block_id = b.id order by b.block_number desc limit 25 offset " + offset;
           
           const response = await fetch(api_server + '/v1/queries/run', {
               method: 'POST',
@@ -231,6 +228,7 @@ const LatestTransactions = ({
           }
           else if (data && data.records && data.records.length == 0) {
               setErrorMsg("0 results");
+              setLoadingSql(false);
           }
       } catch (e) {
           console.log(e);
@@ -333,15 +331,20 @@ const LatestTransactions = ({
         </div>
         <br />
         <div style={{width: "100%"}}>
+          { errorMsg != "" && 
+          <div className={`${styles[theme+"-no-results"]}`}>0 transactions</div>
+          }
+          { errorMsg === "" && 
           <DataGrid 
             columns={columns_val} 
             rows={rows} 
             style={{width: "100%", height:height, border: (theme === 'dark' ? "0px solid white" : "0px solid black"), backgroundColor : "transparent"}} 
             rowHeight={50} />
+          }
         </div>
         <div>
           <nav className={`${styles[theme+"-view-component"]}`}>
-            <a href="https://docs.sort.xyz/docs/getting-started" target="_blank">
+            <a href="https://docs.sort.xyz/docs/latest-transactions" target="_blank">
             &#60; view react component &#62;
             </a>
           </nav>

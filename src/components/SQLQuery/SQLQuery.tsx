@@ -137,7 +137,7 @@ const SQLQuery = ({
             
             <div>
                 <nav className={`${styles[theme + "-view-component"]}`}>
-                <a href="https://docs.sort.xyz/docs/getting-started" target="_blank">
+                <a href="https://docs.sort.xyz/docs/sql-query" target="_blank">
                 &#60; view react component &#62;
                 </a>
                 </nav>

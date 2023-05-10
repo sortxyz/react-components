@@ -95,16 +95,13 @@ const PushNotifications = ({
 
             { rows.length === 0 && 
                 <div style={{margin: "50px", textAlign: "center"}}>
-                    <div>Waiting for transactions....</div>
-                    <div>
-                        <img src="https://sort.xyz/images/preloader/logo.gif" />
-                    </div>
+                    &nbsp;
                 </div>
             }
            
             <div>
                 <nav className={`${styles[theme + "-view-component"]}`}>
-                    <a href="https://docs.sort.xyz/docs/getting-started" target="_blank">
+                    <a href="https://docs.sort.xyz/docs/push-notifications" target="_blank">
                         &#60; view react component &#62;
                     </a>
                 </nav>
