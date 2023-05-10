@@ -200,11 +200,17 @@
     color: #000;
 }
 
-.dark-view-component, .light-view-component {
+.dark-view-component {
     display: flex;
     justify-content: right;
     font-size: 18px;
-} 
+}
+
+.light-view-component {
+    display: flex;
+    justify-content: right;
+    font-size: 18px;
+}
 
 .light-view-component a:link {
     color: #000 !important;
