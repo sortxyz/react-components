@@ -1,6 +1,6 @@
 {
   "name": "@sort/react-components",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "React components for Sort",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
