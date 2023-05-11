@@ -1,5 +1,5 @@
 {
-  "name": "@sortxyz/react-components",
+  "name": "@sort/react-components",
   "version": "0.0.9",
   "description": "React components for Sort",
   "main": "lib/index.js",
@@ -66,6 +66,10 @@
     "react-data-grid": "^7.0.0-beta.28",
     "tls": "^0.0.1"
   },
-  "repository": "git@github.com:sortxyz/components.git",
+  "repository": "git@github.com:sortxyz/react-components.git",
+  "bugs": {
+    "url": "https://github.com/sortxyz/react-components/issues"
+  },
+  "homepage": "https://github.com/sortxyz/react-components",
   "relativeDependencies": {}
 }
