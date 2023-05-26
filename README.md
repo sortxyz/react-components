@@ -1,6 +1,14 @@
-# sort.xyz react components
+# [sort.xyz](https://sort.xyz) react components
+
+> 🧪 This project is currently in ALPHA which means you can expect bugs and API
+> changes.  > Feedback? Let us know by [opening an
+> issue](https://github.com/sortxyz/react-components/issues).
+
+---
 
 React components created to simplify web3 UI application development.
+
+_Note: to use these components you'll need a [free Sort API key]()._
 
 1. [`<SQLQuery/>`](#sqlquery)
 1. [`<LatestTransactions/>`](#latesttransactions)
@@ -65,3 +73,20 @@ import { PushNotifications } from "@sortxyz/react-components";
 ```
 
 Explore the [interactive example](https://sort.xyz/contracts/matic/0xd1f9c58e33933a993a3891f8acfe05a68e1afc05/push)
+
+## Feedback
+
+🧪 This project is currently in ALPHA which means you can expect bugs and API
+changes. Feedback? Please let us know by opening an issue.
+
+## More information
+
+Find out more about what you can build using Sort today at
+https://docs.sort.xyz.
+
+## Security
+
+If you believe you have found a security vulnerability, we encourage you to
+responsibly disclose this and not open a public issue. We will investigate all
+legitimate reports. Email security@sort.xyz to disclose any security
+vulnerabilities.
