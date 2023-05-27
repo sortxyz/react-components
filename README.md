@@ -1,8 +1,8 @@
 # [sort.xyz](https://sort.xyz) react components
 
 > 🧪 This project is currently in ALPHA which means you can expect bugs and API
-> changes.  > Feedback? Let us know by [opening an
-> issue](https://github.com/sortxyz/react-components/issues).
+> changes.  
+> Feedback? Let us know by [opening an issue](https://github.com/sortxyz/react-components/issues).
 
 ---
 
