@@ -8,7 +8,7 @@
 
 React components created to simplify web3 UI application development.
 
-_Note: to use these components you'll need a [free Sort API key](https://docs.sort.xyz/docs/api-keys)._
+_Note: To use these components you'll need a [free Sort API key](https://docs.sort.xyz/docs/api-keys)._
 
 1. [`<SQLQuery/>`](#sqlquery)
 1. [`<LatestTransactions/>`](#latesttransactions)
