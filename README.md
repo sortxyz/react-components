@@ -27,7 +27,7 @@ npm install @sort/react-components
 Execute a SQL query and display as a table
 
 ```jsx
-import { SQLQuery } from "@sortxyz/react-components";
+import { SQLQuery } from "@sort/react-components";
 
 <SQLQuery
   query="select * from polygon.transaction where to_address='0xd1f9c58e33933a993a3891f8acfe05a68e1afc05' order by block_id desc"
@@ -44,7 +44,7 @@ Explore the [interactive example](https://sort.xyz/contracts/matic/0xd1f9c58e339
 Show your latest transactions in a table
 
 ```jsx
-import { LatestTransactions } from "@sortxyz/react-components";
+import { LatestTransactions } from "@sort/react-components";
 
 <LatestTransactions
    contract_address="0xd1f9c58e33933a993a3891f8acfe05a68e1afc05"
@@ -63,7 +63,7 @@ Explore the [interactive example](https://sort.xyz/contracts/matic/0xd1f9c58e339
 Visualize real-time contract events
 
 ```jsx
-import { PushNotifications } from "@sortxyz/react-components";
+import { PushNotifications } from "@sort/react-components";
 
 <PushNotifications
     contract_address="0xd1f9c58e33933a993a3891f8acfe05a68e1afc05"
