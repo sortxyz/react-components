@@ -90,7 +90,7 @@ const columns_val = [
     "width": "12.5%",
     resizable: true,
     cellClass: styles[theme + "-colSpanClassname"],
-    headerCellClass: styles[theme + "--headerCell"]
+    headerCellClass: styles[theme + "-headerCell"]
   },
   {
     "key" : "from",
