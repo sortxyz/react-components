@@ -50,73 +50,73 @@ const LatestTransactions = ({
 
 type Row = any;
 
-const columns_val = [ 
-  { 
-    "key" : "hash", 
-    "name" : "Hash", 
+const columns_val = [
+  {
+    "key" : "hash",
+    "name" : "Hash",
     "width": "12.5%",
     resizable: true,
     formatter(props: FormatterProps<Row>) { return <a href={'https://'+(blockchain === 'ethereum' ? 'etherscan' : 'polygonscan') +'.com/tx/' + props.row.hash} target="_blank">{props.row.hash}</a> },
     cellClass: styles[theme + "-colSpanClassname"],
     headerCellClass: styles[theme + "-headerCell"]
   },
-  { 
-    "key" : "method", 
-    "name" : "Method", 
+  {
+    "key" : "method",
+    "name" : "Method",
     "width": "12.5%",
-    resizable: true, 
-    cellClass(props: FormatterProps<Row>) { return styles[theme + "-methodSpanClassname"] }, 
+    resizable: true,
+    cellClass(props: FormatterProps<Row>) { return styles[theme + "-methodSpanClassname"] },
     headerCellClass: styles[theme + "-headerCell"]
   },
-  { 
-    "key" : "type", 
-    "name" : "Type", 
-    "width": "12.5%",
-    resizable: true, 
-    cellClass: styles[theme + "-colSpanClassname"],
-    headerCellClass: styles[theme + "-headerCell"]
-  },
-  { 
-    "key" : "block", 
-    "name" : "Block", 
+  {
+    "key" : "type",
+    "name" : "Type",
     "width": "12.5%",
     resizable: true,
     cellClass: styles[theme + "-colSpanClassname"],
-    headerCellClass: styles[theme + "-headerCell"] 
+    headerCellClass: styles[theme + "-headerCell"]
   },
-  { 
-    "key" : "age", 
-    "name" : "Age", 
+  {
+    "key" : "block",
+    "name" : "Block",
     "width": "12.5%",
     resizable: true,
     cellClass: styles[theme + "-colSpanClassname"],
-    headerCellClass: styles[theme + "-colSpanClassname"] 
+    headerCellClass: styles[theme + "-headerCell"]
   },
-  { 
-    "key" : "from", 
-    "name" : "From", 
+  {
+    "key" : "age",
+    "name" : "Age",
+    "width": "12.5%",
+    resizable: true,
+    cellClass: styles[theme + "-colSpanClassname"],
+    headerCellClass: styles[theme + "--headerCell"]
+  },
+  {
+    "key" : "from",
+    "name" : "From",
     "width": "12.5%",
     resizable: true,
     formatter(props: FormatterProps<Row>) { return <a href={'https://'+(blockchain === 'ethereum' ? 'etherscan' : 'polygonscan') +'.com/address/' + props.row.from} target="_blank">{props.row.from}</a> },
     cellClass: styles[theme + "-colSpanClassname"],
-    headerCellClass: styles[theme + "-headerCell"] 
+    headerCellClass: styles[theme + "-headerCell"]
   },
-  { 
-    "key" : "to", 
-    "name" : "To", 
+  {
+    "key" : "to",
+    "name" : "To",
     "width": "12.5%",
     resizable: true,
     formatter(props: FormatterProps<Row>) { return <a href={'https://'+(blockchain === 'ethereum' ? 'etherscan' : 'polygonscan') +'.com/address/' + props.row.to} target="_blank">{props.row.to}</a>},
     cellClass: styles[theme + "-colSpanClassname"],
-    headerCellClass: styles[theme + "-headerCell"]  
+    headerCellClass: styles[theme + "-headerCell"]
   },
-  { 
-    "key" : "value", 
-    "name" : "Value", 
+  {
+    "key" : "value",
+    "name" : "Value",
     "width": "12.5%",
     resizable: true,
     cellClass: styles[theme + "-colSpanClassname"],
-    headerCellClass: styles[theme + "-headerCell"] 
+    headerCellClass: styles[theme + "-headerCell"]
   }
 ];
 
@@ -161,7 +161,7 @@ const columns_val = [
 
           const full_response = await response.json();
           const data = full_response?.data;
-          
+
           // first, check for an error message
           if (full_response && full_response.code && full_response.code == 400) {
               setErrorMsg(full_response.message);
@@ -176,14 +176,14 @@ const columns_val = [
       } catch (e) {
           console.log(e);
       }
-      
+
   }
 
   async function executeQuery(): Promise<void> {
     try {
         setLoadingSql(true);
         let query = "select transaction_hash as hash, function as method, b.block_number, b.timestamp, t.from_address, t.to_address, t.value / 1e18 as value from "+blockchain+".transaction t, "+blockchain+".block b where to_address = '"+contract_address.toLowerCase()+"' and t.block_id = b.id order by b.block_number desc limit 25 offset " + offset;
-        
+
         const response = await fetch(api_server + '/v1/queries/run', {
             method: 'POST',
             headers: {
@@ -198,7 +198,7 @@ const columns_val = [
 
         const full_response = await response.json();
         const data = full_response?.data;
-       
+
         // first, check for an error message
         if (full_response && full_response.code && full_response.code == 400) {
             setErrorMsg(full_response.message);
@@ -214,7 +214,7 @@ const columns_val = [
                 const timeAgo = new TimeAgo('en-US')
                 let time_ago = timeAgo.format(new Date(data_row.timestamp));
 
-                let row = { 
+                let row = {
                   "hash" : data_row.hash,
                   "method" : data_row.method,
                   "type" : "Transaction",
@@ -239,7 +239,7 @@ const columns_val = [
     } catch (e) {
         console.log(e);
     }
-    
+
 }
 
 const increaseOffset = () => {
@@ -259,11 +259,11 @@ const decreaseOffset = () => {
 
 return (
   <>
-    { loadingSql && 
+    { loadingSql &&
     <div className={`${styles["main-container"]}`}>
       <div className={`${styles["summary"]}`}>
         <div className={`${styles[theme+"-summary-text"]}`}>
-          <div className={`${styles["skeleton"]} ${styles["skeleton-text"]} ${styles["skeleton-text__body"]}`} /> 
+          <div className={`${styles["skeleton"]} ${styles["skeleton-text"]} ${styles["skeleton-text__body"]}`} />
         </div>
         <div className={`${styles["pagination"]}`}>
           <nav aria-label="pagination" className={`${styles["container"]}`}>
@@ -274,12 +274,12 @@ return (
           </nav>
         </div>
       </div>
-     
+
       <div style={{width: "100%"}}>
-        <DataGrid 
-          columns={columns_val} 
-          rows={rows} 
-          style={{width: "100%", height:height,border: "0px solid white", backgroundColor : "transparent"}} 
+        <DataGrid
+          columns={columns_val}
+          rows={rows}
+          style={{width: "100%", height:height,border: "0px solid white", backgroundColor : "transparent"}}
           rowHeight={50} />
       </div>
       <div>
@@ -293,16 +293,16 @@ return (
       </div>
     </div>
     }
-    { !loadingSql && 
+    { !loadingSql &&
     <div className={`${styles["main-container"]}`}>
       <div className={`${styles["summary"]}`}>
         <div className={`${styles[theme+"-summary-text"]}`}>
 
-          { queryCount < 25 && 
+          { queryCount < 25 &&
             <span className={`${styles[theme+"-summary-number"]}`}>Latest transactions</span>
           }
 
-          { queryCount > 25 && 
+          { queryCount > 25 &&
             <>
               {offset == 0 && <>
               Latest <span className={`${styles[theme+"-summary-number"]}`}>25 transactions</span> from a total of <span className={`${styles[theme+"-summary-number"]}`}>{queryCount}</span> transactions
@@ -314,14 +314,14 @@ return (
           }
 
         </div>
-        
+
         <div className={`${styles["pagination"]}`}>
           <nav aria-label="pagination" className={`${styles["container"]}`}>
               <ul className={`${styles["buttons"]}`}>
-                  {offset > 0 && 
+                  {offset > 0 &&
                     <li onClick={() => decreaseOffset()} className={`${styles[theme+"-left"]}`}><a href="#"><span aria-hidden="true">&#x2039;</span></a></li>
                   }
-                  {offset == 0 && 
+                  {offset == 0 &&
                     <li className={`${styles[theme+"-left-grey"]}`}><span aria-hidden="true">&#x2039;</span></li>
                   }
 
@@ -337,14 +337,14 @@ return (
       </div>
       <br />
       <div style={{width: "100%"}}>
-        { errorMsg != "" && 
+        { errorMsg != "" &&
         <div className={`${styles[theme+"-no-results"]}`}>0 transactions</div>
         }
-        { errorMsg === "" && 
-        <DataGrid 
-          columns={columns_val} 
-          rows={rows} 
-          style={{width: "100%", height:height, border: (theme === 'dark' ? "0px solid white" : "0px solid black"), backgroundColor : "transparent"}} 
+        { errorMsg === "" &&
+        <DataGrid
+          columns={columns_val}
+          rows={rows}
+          style={{width: "100%", height:height, border: (theme === 'dark' ? "0px solid white" : "0px solid black"), backgroundColor : "transparent"}}
           rowHeight={50} />
         }
       </div>
