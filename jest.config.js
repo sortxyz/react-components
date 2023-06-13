@@ -1,10 +1,4 @@
-const nextJest = require('next/jest');
-
-const createJestConfig = nextJest({
-  dir: './',
-});
-
-const customJestConfig = {
+module.exports = {
   preset: 'ts-jest',
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jsdom',
@@ -14,5 +8,3 @@ const customJestConfig = {
     '^@globalStyles/(.*)$': '<rootDir>/src/components/styles/$1',
   },
 };
-
-module.exports = createJestConfig(customJestConfig);

@@ -8,9 +8,6 @@ node_modules
 # Ignore all log files:
 *.log
 
-# Ignore Next.js build output:
-.next
-
 # Ignore TypeScript type definitions:
 *.d.ts
 
