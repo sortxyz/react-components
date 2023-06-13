@@ -19,9 +19,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build and test
+      - name: Build, lint, and test
         run: |
           npm run build
+          npm run lint
           npm test
         env:
           AUTH0_SECRET: ${{ secrets.AUTH0_SECRET }}
