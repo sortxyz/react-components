@@ -24,6 +24,13 @@
     "declarationDir": "lib",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "global.d.ts", "jest.config.js"],
+  "include": [
+    "src",
+    "global.d.ts",
+    "jest.config.js",
+    "jest.setup.ts",
+    "__mocks__",
+    "__tests__"
+  ],
   "exclude": ["node_modules", "lib"]
 }
