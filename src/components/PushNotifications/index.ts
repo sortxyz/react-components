@@ -1,1 +1,1 @@
-export { default } from "./PushNotifications";
+export { default } from './PushNotifications';
