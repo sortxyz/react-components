@@ -37,6 +37,7 @@
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-var-requires": "off",
     "import/no-anonymous-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
@@ -59,6 +60,8 @@
     "no-console": "off",
     "no-dupe-keys": "off",
     "no-inner-declarations": "off",
+    "no-plusplus": "off",
+    "no-restricted-exports": "off",
     "no-undef": "off",
     "no-useless-escape": "off",
     "react/function-component-definition": "off",
