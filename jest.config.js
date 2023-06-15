@@ -11,4 +11,5 @@ module.exports = {
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testEnvironment: 'jsdom',
   testMatch: ['**/__tests__/**/*.[jt]s?(x)'],
+  testPathIgnorePatterns: ['<rootDir>/lib/'],
 };
