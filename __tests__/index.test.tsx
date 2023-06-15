@@ -8,11 +8,13 @@ import TimeAgo from 'javascript-time-ago';
 import LatestTransactions from '../src/components/LatestTransactions';
 
 import {
-  TWENTY_FIVE_TRANSACTIONS_DATA,
-  TWENTY_FIVE_TRANSACTIONS_COUNT,
-  INVALID_CONTRACT_ADDRESS_DATA,
-  INVALID_CONTRACT_ADDRESS_COUNT,
-} from '../__mocks__/LatestTransactionsMockedData';
+  INVALID_CONTRACT_ADDRESS,
+  INVALID_CONTRACT_COUNT_RESPONSE,
+  INVALID_CONTRACT_RECORDS_RESPONSE,
+  TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
+  TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+  TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+} from '../__mocks__/LatestTransactions';
 
 interface ExpectedCell {
   type: 'link' | 'text';
@@ -143,8 +145,8 @@ describe('LatestTransactions', () => {
   describe('Rendering and Data Fetching', () => {
     test('renders loading screen', () => {
       mockFetchResponses(
-        TWENTY_FIVE_TRANSACTIONS_DATA,
-        TWENTY_FIVE_TRANSACTIONS_COUNT,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
       );
       renderComponent('ethereum', '0x1234', 'test_key');
       expect(screen.getByTestId('skeleton')).toBeInTheDocument();
@@ -152,8 +154,8 @@ describe('LatestTransactions', () => {
 
     test('fetches data', async () => {
       mockFetchResponses(
-        TWENTY_FIVE_TRANSACTIONS_DATA,
-        TWENTY_FIVE_TRANSACTIONS_COUNT,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
       );
 
       renderComponent('ethereum', '0x1234', 'test_key');
@@ -168,8 +170,8 @@ describe('LatestTransactions', () => {
       const blockchain = 'ethereum';
 
       mockFetchResponses(
-        TWENTY_FIVE_TRANSACTIONS_DATA,
-        TWENTY_FIVE_TRANSACTIONS_COUNT,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
       );
 
       renderComponent(blockchain, '0x1234', 'test_key');
@@ -185,7 +187,7 @@ describe('LatestTransactions', () => {
       const allCells = await screen.getAllByRole('gridcell');
       const expectedValues = createExpectedValues(
         blockchain,
-        TWENTY_FIVE_TRANSACTIONS_DATA,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
       );
 
       validateTransactionData(allCells, expectedValues);
@@ -195,15 +197,11 @@ describe('LatestTransactions', () => {
   describe('Validation and Error Handling', () => {
     test('shows "0 transactions" when given an invalid contract address', async () => {
       mockFetchResponses(
-        INVALID_CONTRACT_ADDRESS_DATA,
-        INVALID_CONTRACT_ADDRESS_COUNT,
+        INVALID_CONTRACT_RECORDS_RESPONSE,
+        INVALID_CONTRACT_COUNT_RESPONSE,
       );
 
-      renderComponent(
-        'ethereum',
-        '0x887f3909c14dabd9e9510128ca6cbb448e932d7',
-        'test_key',
-      );
+      renderComponent('ethereum', INVALID_CONTRACT_ADDRESS, 'test_key');
 
       await waitFor(() => expect(fetchMock.mock.calls.length).toEqual(2));
       await waitFor(() =>
@@ -252,13 +250,13 @@ describe('LatestTransactions', () => {
   xdescribe('Styling and Appearance', () => {
     test('background color of the table is white when "dark" mode is enabled', async () => {
       mockFetchResponses(
-        TWENTY_FIVE_TRANSACTIONS_DATA,
-        TWENTY_FIVE_TRANSACTIONS_COUNT,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
       );
 
       renderComponent(
         'ethereum',
-        '0x887f3909c14dabd9e9510128ca6cbb448e932d7',
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
         'test_key',
       );
 
@@ -270,13 +268,13 @@ describe('LatestTransactions', () => {
 
     test('background color of the table is white when "light" mode is enabled', async () => {
       mockFetchResponses(
-        TWENTY_FIVE_TRANSACTIONS_DATA,
-        TWENTY_FIVE_TRANSACTIONS_COUNT,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
       );
 
       renderComponent(
         'ethereum',
-        '0x887f3909c14dabd9e9510128ca6cbb448e932d7',
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
         'test_key',
       );
 
@@ -303,8 +301,8 @@ describe('LatestTransactions', () => {
 
       // Mock response for the initial page
       mockFetchResponses(
-        TWENTY_FIVE_TRANSACTIONS_DATA,
-        TWENTY_FIVE_TRANSACTIONS_COUNT,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
       );
 
       // Mock response for the next page
@@ -349,7 +347,7 @@ describe('LatestTransactions', () => {
       );
       const expectedCurrentPageValues = createExpectedValues(
         'ethereum',
-        TWENTY_FIVE_TRANSACTIONS_DATA,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
       );
 
       validateTransactionData(allCells, expectedPrevPageValues);
