@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "test": "cross-env NODE_ENV=test jest",
     "test:cov": "npm run test -- --coverage",
-    "test:watch": "npm run lint:fix && cross-env NODE_ENV=test jest --watch"
+    "test:watch": "npm run lint:fix && cross-env NODE_ENV=test jest --watch",
+    "test:watch2": "cross-env NODE_ENV=test jest --watch"
   },
   "browser": {
     "child_process": false,
@@ -31,7 +32,6 @@
     "classnames": "^2.3.2",
     "deep-equal": "^2.2.1",
     "fs": "^0.0.1-security",
-    "javascript-time-ago": "^2.5.9",
     "net": "^1.0.2",
     "pusher-js": "^8.0.2",
     "react": "^18.2.0",
@@ -48,6 +48,7 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.0",
     "@types/react": "^18.2.12",
@@ -66,6 +67,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
+    "javascript-time-ago": "^2.5.9",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "jest-fetch-mock": "^3.0.3",
