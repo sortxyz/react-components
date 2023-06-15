@@ -1,10 +1,9 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
 import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
 
 import LatestTransactions from '../src/components/LatestTransactions';
 
@@ -14,8 +13,6 @@ import {
   INVALID_CONTRACT_ADDRESS_DATA,
   INVALID_CONTRACT_ADDRESS_COUNT,
 } from './__mocks__/LatestTransactionsMockedData';
-
-// TimeAgo.addDefaultLocale(en);
 
 interface ExpectedCell {
   type: 'link' | 'text';
@@ -131,12 +128,24 @@ const validateTransactionData = (
 };
 
 describe('LatestTransactions', () => {
+  beforeAll(() => {
+    // Disable spurious act warnings
+    // Reference 1: https://github.com/facebook/react/pull/22561
+    // Reference 2: https://github.com/reactwg/react-18/discussions/102
+    // Reference 3: https://github.com/testing-library/react-testing-library/issues/1108
+    global.IS_REACT_ACT_ENVIRONMENT = false;
+  });
+
   beforeEach(() => {
     fetchMock.resetMocks();
   });
 
   describe('Rendering and Data Fetching', () => {
     test('renders loading screen', () => {
+      mockFetchResponses(
+        TWENTY_FIVE_TRANSACTIONS_DATA,
+        TWENTY_FIVE_TRANSACTIONS_COUNT,
+      );
       renderComponent('ethereum', '0x1234', 'test_key');
       expect(screen.getByTestId('skeleton')).toBeInTheDocument();
     });
@@ -169,8 +178,8 @@ describe('LatestTransactions', () => {
         expect(screen.getByText('Latest transactions')).toBeInTheDocument(),
       );
 
-      HEADERS.forEach(async (header) => {
-        expect(await screen.findByText(header)).toBeInTheDocument();
+      HEADERS.forEach((header) => {
+        expect(screen.getByText(header)).toBeInTheDocument();
       });
 
       const allCells = await screen.getAllByRole('gridcell');
@@ -183,11 +192,12 @@ describe('LatestTransactions', () => {
     });
   });
 
-  xdescribe('Validation and Error Handling', () => {
+  describe('Validation and Error Handling', () => {
     test('shows "0 transactions" when given an invalid contract address', async () => {
-      fetchMock
-        .mockResponseOnce(JSON.stringify(INVALID_CONTRACT_ADDRESS_DATA))
-        .mockResponseOnce(JSON.stringify(INVALID_CONTRACT_ADDRESS_COUNT));
+      mockFetchResponses(
+        INVALID_CONTRACT_ADDRESS_DATA,
+        INVALID_CONTRACT_ADDRESS_COUNT,
+      );
 
       renderComponent(
         'ethereum',
@@ -203,9 +213,7 @@ describe('LatestTransactions', () => {
 
     // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid Blockchain" when given an invalid blockchain', async () => {
-      fetchMock
-        .mockResponseOnce(JSON.stringify('FILL_ME_IN'))
-        .mockResponseOnce(JSON.stringify('FILL_ME_IN'));
+      mockFetchResponses('FILL_ME_IN', 'FILL_ME_IN');
 
       renderComponent('anthoneum', 'FILL_ME_IN', 'FILL_ME_IN');
 
@@ -217,9 +225,7 @@ describe('LatestTransactions', () => {
 
     // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid API Key" when given an invalid API Key', async () => {
-      fetchMock
-        .mockResponseOnce(JSON.stringify('FILL_ME_IN'))
-        .mockResponseOnce(JSON.stringify('FILL_ME_IN'));
+      mockFetchResponses('FILL_ME_IN', 'FILL_ME_IN');
 
       renderComponent('ethereum', 'FILL_ME_IN', 'FILL_ME_IN');
 
@@ -231,9 +237,7 @@ describe('LatestTransactions', () => {
 
     // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid API Server URL" when given an invalid API server URL', async () => {
-      fetchMock
-        .mockResponseOnce(JSON.stringify('FILL_ME_IN'))
-        .mockResponseOnce(JSON.stringify('FILL_ME_IN'));
+      mockFetchResponses('FILL_ME_IN', 'FILL_ME_IN');
 
       renderComponent('ethereum', 'FILL_ME_IN', 'FILL_ME_IN', 'FILL_ME_IN');
 
@@ -247,9 +251,10 @@ describe('LatestTransactions', () => {
   // WIP: Will resolve as I refactor the component
   xdescribe('Styling and Appearance', () => {
     test('background color of the table is white when "dark" mode is enabled', async () => {
-      fetchMock
-        .mockResponseOnce(JSON.stringify(TWENTY_FIVE_TRANSACTIONS_DATA))
-        .mockResponseOnce(JSON.stringify(TWENTY_FIVE_TRANSACTIONS_COUNT));
+      mockFetchResponses(
+        TWENTY_FIVE_TRANSACTIONS_DATA,
+        TWENTY_FIVE_TRANSACTIONS_COUNT,
+      );
 
       renderComponent(
         'ethereum',
@@ -264,9 +269,10 @@ describe('LatestTransactions', () => {
     });
 
     test('background color of the table is white when "light" mode is enabled', async () => {
-      fetchMock
-        .mockResponseOnce(JSON.stringify(TWENTY_FIVE_TRANSACTIONS_DATA))
-        .mockResponseOnce(JSON.stringify(TWENTY_FIVE_TRANSACTIONS_COUNT));
+      mockFetchResponses(
+        TWENTY_FIVE_TRANSACTIONS_DATA,
+        TWENTY_FIVE_TRANSACTIONS_COUNT,
+      );
 
       renderComponent(
         'ethereum',
