@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DataGrid from 'react-data-grid';
+import DataGrid, { Column } from 'react-data-grid';
 import 'react-data-grid/lib/styles.css';
 import styles from '../styles/global.module.css';
 
@@ -41,7 +41,9 @@ const SQLQuery = ({
   const [rows, setRows] = useState<Record<string, unknown>[]>([]);
 
   // Date columns in table
-  const [columns, setColumns] = useState<Record<string, unknown>[]>([]);
+  const [columns, setColumns] = useState<
+    readonly Column<Record<string, unknown>, unknown>[]
+  >([]);
 
   // Query error message
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -69,7 +71,7 @@ const SQLQuery = ({
       } else if (data && data.records && data.records.length > 0) {
         // set columns from first result
         const keys = Object.keys(data.records[0]);
-        const columnsTemp = [];
+        const columnsTemp: Column<Record<string, unknown>, unknown>[] = [];
         for (let i = 0; i < keys.length; i++) {
           columnsTemp.push({
             key: keys[i],
@@ -78,7 +80,7 @@ const SQLQuery = ({
             cellClass: styles[`${theme}-colSpanClassname`],
           });
         }
-        setColumns(columnsTemp);
+        setColumns(columnsTemp as Column<Record<string, unknown>, unknown>[]);
 
         // set rows
         // escape JSON if found
