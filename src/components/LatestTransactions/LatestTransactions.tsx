@@ -71,7 +71,7 @@ const LatestTransactions = ({
       name: 'Hash',
       width: '12.5%',
       resizable: true,
-      renderCell: (props: RenderCellProps<Row>) => {
+      renderCell: (props: RenderCellProps<TransactionRow>) => {
         return (
           <a
             href={`https://${
@@ -126,7 +126,7 @@ const LatestTransactions = ({
       name: 'From',
       width: '12.5%',
       resizable: true,
-      renderCell: (props: RenderCellProps<Row>) => {
+      renderCell: (props: RenderCellProps<TransactionRow>) => {
         return (
           <a
             href={`https://${
@@ -147,7 +147,7 @@ const LatestTransactions = ({
       name: 'To',
       width: '12.5%',
       resizable: true,
-      renderCell: (props: RenderCellProps<Row>) => {
+      renderCell: (props: RenderCellProps<TransactionRow>) => {
         return (
           <a
             href={`https://${

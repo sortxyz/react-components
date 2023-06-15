@@ -38,13 +38,13 @@ const SQLQuery = ({
   theme = 'dark',
 }: SQLQueryProps) => {
   // Data rows in table
-  const [rows, setRows] = React.useState<any[]>([]);
+  const [rows, setRows] = useState<Record<string, unknown>[]>([]);
 
   // Date columns in table
-  const [columns, setColumns] = React.useState<any[]>([]);
+  const [columns, setColumns] = useState<Record<string, unknown>[]>([]);
 
   // Query error message
-  const [errorMsg, setErrorMsg] = React.useState<any>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   async function executeQuery(): Promise<void> {
     try {
@@ -82,10 +82,10 @@ const SQLQuery = ({
 
         // set rows
         // escape JSON if found
-        const rowsTemp = [] as any;
+        const rowsTemp: Record<string, unknown>[] = [];
         let keys2;
         for (let i = 0; i < data.records.length; i++) {
-          const valuesTemp = {} as any;
+          const valuesTemp: Record<string, unknown> = {};
           keys2 = Object.keys(data.records[i]);
           for (let j = 0; j < keys2.length; j++) {
             if (typeof data.records[i][keys2[j]] === 'object') {
