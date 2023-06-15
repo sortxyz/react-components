@@ -10,4 +10,5 @@ module.exports = {
   setupFiles: ['./jest.setup.ts'],
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testEnvironment: 'jsdom',
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)'],
 };
