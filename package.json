@@ -14,7 +14,8 @@
     "test": "cross-env NODE_ENV=test jest",
     "test:clear": "cross-env NODE_ENV=test jest --clearCache",
     "test:cov": "npm run test -- --coverage",
-    "test:watch": "npm run lint:fix && cross-env NODE_ENV=test jest --watch"
+    "test:watch": "npm run lint:fix && cross-env NODE_ENV=test jest --watchAll",
+    "test:watch-without-lint-fix": "cross-env NODE_ENV=test jest --watchAll"
   },
   "browser": {
     "child_process": false,
