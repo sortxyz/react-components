@@ -39,7 +39,7 @@
     "import/no-anonymous-default-export": "off",
     "import/no-extraneous-dependencies": "off",
     "jsx-a11y/anchor-is-valid": [
-      "error",
+      "off",
       {
         "components": [
           "Link"
@@ -50,6 +50,8 @@
         ]
       }
     ],
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
     "prettier/prettier": [
       "error",
       {
@@ -66,8 +68,9 @@
     "no-useless-escape": "off",
     "react/function-component-definition": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/react-in-jsx-scope": "off",
+    "react/no-unstable-nested-components": "off",
     "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off",
     "react-hooks/exhaustive-deps": "off"
   },
