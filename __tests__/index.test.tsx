@@ -12,7 +12,7 @@ import {
   TWENTY_FIVE_TRANSACTIONS_COUNT,
   INVALID_CONTRACT_ADDRESS_DATA,
   INVALID_CONTRACT_ADDRESS_COUNT,
-} from './__mocks__/LatestTransactionsMockedData';
+} from '../__mocks__/LatestTransactionsMockedData';
 
 interface ExpectedCell {
   type: 'link' | 'text';
@@ -288,6 +288,7 @@ describe('LatestTransactions', () => {
   });
 
   // WIP: Fix pagination in the component and build out this test
+  // TODO: Add a new Data and Count mock that has greater than 25 transactions
   xdescribe('Pagination', () => {
     test('can navigate to next and previous page', async () => {
       const nextPageData = [
