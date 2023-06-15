@@ -12,9 +12,9 @@
     "prepublishOnly": "npm run build",
     "prepare": "husky install",
     "test": "cross-env NODE_ENV=test jest",
+    "test:clear": "cross-env NODE_ENV=test jest --clearCache",
     "test:cov": "npm run test -- --coverage",
-    "test:watch": "npm run lint:fix && cross-env NODE_ENV=test jest --watch",
-    "test:watch2": "cross-env NODE_ENV=test jest --watch"
+    "test:watch": "npm run lint:fix && cross-env NODE_ENV=test jest --watch"
   },
   "browser": {
     "child_process": false,
