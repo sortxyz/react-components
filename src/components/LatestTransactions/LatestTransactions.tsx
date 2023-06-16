@@ -56,6 +56,12 @@ type TransactionRow = {
   value: string;
 };
 
+const blockchainCurrency: Record<string, string> = {
+  ethereum: 'ETH',
+  polygon: 'MATIC',
+  goerli: 'GETH',
+};
+
 const LatestTransactions = ({
   contract_address,
   blockchain,
@@ -65,6 +71,12 @@ const LatestTransactions = ({
   theme = 'dark',
   enableVirtualization = true,
 }: LatestTransactionsProps) => {
+  const blockExplorerBaseURL = {
+    ethereum: 'https://etherscan.io',
+    goerli: 'https://goerli.etherscan.io',
+    polygon: 'https://polygonscan.com',
+  };
+
   const columns_val: Column<TransactionRow>[] = [
     {
       key: 'hash',
@@ -74,9 +86,7 @@ const LatestTransactions = ({
       renderCell: (props: RenderCellProps<TransactionRow>) => {
         return (
           <a
-            href={`https://${
-              blockchain === 'ethereum' ? 'etherscan' : 'polygonscan'
-            }.com/tx/${props.row.hash}`}
+            href={`${blockExplorerBaseURL[blockchain]}/tx/${props.row.hash}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -129,9 +139,7 @@ const LatestTransactions = ({
       renderCell: (props: RenderCellProps<TransactionRow>) => {
         return (
           <a
-            href={`https://${
-              blockchain === 'ethereum' ? 'etherscan' : 'polygonscan'
-            }.com/address/${props.row.from}`}
+            href={`${blockExplorerBaseURL[blockchain]}/address/${props.row.from}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -150,9 +158,7 @@ const LatestTransactions = ({
       renderCell: (props: RenderCellProps<TransactionRow>) => {
         return (
           <a
-            href={`https://${
-              blockchain === 'ethereum' ? 'etherscan' : 'polygonscan'
-            }.com/address/${props.row.to}`}
+            href={`${blockExplorerBaseURL[blockchain]}/address/${props.row.to}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -265,7 +271,7 @@ const LatestTransactions = ({
             age: time_ago,
             from: data_row.from_address,
             to: data_row.to_address,
-            value: `${data_row.value} ETH`,
+            value: `${data_row.value} ${blockchainCurrency[blockchain]}`,
           };
           rowsTemp.push(row);
         }
