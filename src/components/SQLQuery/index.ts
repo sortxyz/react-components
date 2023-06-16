@@ -1,1 +1,1 @@
-export { default } from "./SQLQuery";
+export { default } from './SQLQuery';

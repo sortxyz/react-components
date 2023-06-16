@@ -1,0 +1,26 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all node_modules directories:
+node_modules
+
+# Ignore all log files:
+*.log
+
+# Ignore TypeScript type definitions:
+*.d.ts
+
+# Ignore config files:
+.env.*
+.nvmrc
+.jest.config.js
+.tsconfig.json
+.tsconfig.tsbuildinfo
+
+# Ignore package manager files:
+package-lock.json
+package.json
+
+# Ignore eslintrc:
+.eslintrc.json

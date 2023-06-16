@@ -1,33 +1,36 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "outDir": "lib",
-      "lib": [
-        "dom",
-        "dom.iterable",
-        "esnext"
-      ],
-      "declaration": true,
-      "declarationDir": "lib",
-      "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": false,
-      "forceConsistentCasingInFileNames": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": false,
-      "noEmit": true,
-      "jsx": "react"
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@styles/*": ["src/components/styles/*"],
+      "@globalStyles/*": ["src/components/styles/*"]
     },
-    "include": [
-      "src",
-      "global.d.ts"
-    ],
-    "exclude": [
-        "node_modules",
-        "lib"
-    ]
-  }
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "noEmit": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "outDir": "lib",
+    "declaration": true,
+    "declarationDir": "lib",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src",
+    "global.d.ts",
+    "jest.config.js",
+    "jest.setup.ts",
+    "__mocks__",
+    "__tests__"
+  ],
+  "exclude": ["node_modules", "lib"]
+}

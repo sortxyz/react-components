@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build, lint, and test
+        run: |
+          npm run build
+          npm run lint
+          npm run test:clear
+          npm test
+        env:
+          AUTH0_SECRET: ${{ secrets.AUTH0_SECRET }}
+          AUTH0_BASE_URL: ${{ secrets.AUTH0_BASE_URL }}
+          AUTH0_ISSUER_BASE_URL: ${{ secrets.AUTH0_ISSUER_BASE_URL }}
+          AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
+          AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
+
+          STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_ENDPOINT_SECRET: ${{ secrets.STRIPE_ENDPOINT_SECRET }}
+          STRIPE_MONTHLY_PRICEID: ${{ secrets.STRIPE_MONTHLY_PRICEID }}
+          STRIPE_ANNUAL_PRICEID: ${{ secrets.STRIPE_ANNUAL_PRICEID }}
+
+          ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}
+          DEMO_API_KEY: ${{ secrets.DEMO_API_KEY }}
+          NEXT_PUBLIC_API_SERVER: ${{ secrets.NEXT_PUBLIC_API_SERVER }}
