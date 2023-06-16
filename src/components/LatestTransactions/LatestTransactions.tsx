@@ -323,17 +323,13 @@ const LatestTransactions = ({
                     onClick={() => decreaseOffset()}
                     className={`${styles[`${theme}-left`]}`}
                   >
-                    <a href="#">
-                      <span aria-hidden="true">&#x2039;</span>
-                    </a>
+                    <span aria-hidden="true">&#x2039;</span>
                   </li>
                   <li
                     onClick={() => increaseOffset()}
                     className={`${styles[`${theme}-right`]}`}
                   >
-                    <a href="#">
-                      <span aria-hidden="true">&#x203A;</span>
-                    </a>
+                    <span aria-hidden="true">&#x203A;</span>
                   </li>
                 </ul>
               </nav>
@@ -422,9 +418,7 @@ const LatestTransactions = ({
                       onClick={() => decreaseOffset()}
                       className={`${styles[`${theme}-left`]}`}
                     >
-                      <a href="#">
-                        <span aria-hidden="true">&#x2039;</span>
-                      </a>
+                      <span aria-hidden="true">&#x2039;</span>
                     </li>
                   )}
                   {offset === 0 && (
@@ -438,9 +432,7 @@ const LatestTransactions = ({
                       onClick={() => increaseOffset()}
                       className={`${styles[`${theme}-right`]}`}
                     >
-                      <a href="#">
-                        <span aria-hidden="true">&#x203A;</span>
-                      </a>
+                      <span aria-hidden="true">&#x203A;</span>
                     </li>
                   )}
                   {queryCount <= 25 && (
