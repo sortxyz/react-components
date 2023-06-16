@@ -42,6 +42,12 @@ const blockExplorerURL: Record<string, string> = {
   goerli: 'https://goerli.etherscan.io',
 };
 
+const blockchainCurrency: Record<string, string> = {
+  ethereum: 'ETH',
+  polygon: 'MATIC',
+  goerli: 'GETH',
+};
+
 const mockFetchResponses = (responseData: any, countData: any) => {
   fetchMock
     .mockResponseOnce(JSON.stringify(responseData))
@@ -92,7 +98,10 @@ const createExpectedValues = (
       href: `${blockExplorerURL[blockchain]}/address/${record.to_address}`,
       text: record.to_address,
     },
-    { type: 'text', text: `${record.value.toString()} ETH` },
+    {
+      type: 'text',
+      text: `${record.value.toString()} ${blockchainCurrency[blockchain]}`,
+    },
   ]);
 };
 
@@ -155,8 +164,62 @@ describe('LatestTransactions', () => {
       );
     });
 
-    test('renders transaction data table headers + rows (ethereum)', async () => {
+    test('(Ethereum) renders transaction data table headers + rows', async () => {
       const blockchain = 'ethereum';
+
+      mockFetchResponses(
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+      );
+
+      renderComponent(blockchain, '0x1234', 'test_key');
+
+      await waitFor(() =>
+        expect(screen.getByText('Latest transactions')).toBeInTheDocument(),
+      );
+
+      HEADERS.forEach((header) => {
+        expect(screen.getByText(header)).toBeInTheDocument();
+      });
+
+      const allCells = await screen.getAllByRole('gridcell');
+      const expectedValues = createExpectedValues(
+        blockchain,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+      );
+
+      validateTransactionData(allCells, expectedValues);
+    });
+
+    test('(Polygon) renders transaction data table headers + rows', async () => {
+      const blockchain = 'polygon';
+
+      mockFetchResponses(
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+      );
+
+      renderComponent(blockchain, '0x1234', 'test_key');
+
+      await waitFor(() =>
+        expect(screen.getByText('Latest transactions')).toBeInTheDocument(),
+      );
+
+      HEADERS.forEach((header) => {
+        expect(screen.getByText(header)).toBeInTheDocument();
+      });
+
+      const allCells = await screen.getAllByRole('gridcell');
+      const expectedValues = createExpectedValues(
+        blockchain,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+      );
+
+      validateTransactionData(allCells, expectedValues);
+    });
+
+    test('(Goerli) renders transaction data table headers + rows', async () => {
+      const blockchain = 'goerli';
 
       mockFetchResponses(
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
