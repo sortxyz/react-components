@@ -54,26 +54,15 @@ const renderComponent = (
   apiKey: string,
   apiServer?: string,
 ) => {
-  if (!apiServer) {
-    render(
-      <LatestTransactions
-        contract_address={contractAddress}
-        blockchain={blockchain}
-        api_key={apiKey}
-        enableVirtualization={false}
-      />,
-    );
-  } else {
-    render(
-      <LatestTransactions
-        contract_address={contractAddress}
-        blockchain={blockchain}
-        api_key={apiKey}
-        api_server={apiServer}
-        enableVirtualization={false}
-      />,
-    );
-  }
+  render(
+    <LatestTransactions
+      contract_address={contractAddress}
+      blockchain={blockchain}
+      api_key={apiKey}
+      api_server={apiServer || undefined}
+      enableVirtualization={false}
+    />,
+  );
 };
 
 const createExpectedValues = (
