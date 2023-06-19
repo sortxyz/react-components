@@ -1,11 +1,10 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
 import TimeAgo from 'javascript-time-ago';
 
-import { after } from 'node:test';
 import LatestTransactions from '../src/components/LatestTransactions';
 
 import {
@@ -29,9 +28,6 @@ interface ExpectedCell {
   href?: string;
   text: string;
 }
-
-// const BLOCKCHAINS = ['ethereum', 'polygon', 'goerli'];
-const BLOCKCHAINS = ['ethereum'];
 
 const HEADERS = [
   'Hash',
