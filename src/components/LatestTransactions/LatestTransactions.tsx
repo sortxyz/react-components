@@ -221,7 +221,7 @@ const LatestTransactions = ({
         setErrorMsg(full_response.message);
       } else if (data && data.records && data.records.length > 0) {
         const row = data.records[0];
-        setQueryCount(row.count);
+        setQueryCount(parseInt(row.count, 10));
       } else if (data && data.records && data.records.length === 0) {
         setErrorMsg('0 results');
       }
@@ -303,6 +303,20 @@ const LatestTransactions = ({
     }
   };
 
+  const generateRangeText = () => {
+    let range: string;
+
+    if (offset === 0) {
+      range = `${queryCount <= 25 ? queryCount : 25}`;
+    } else {
+      const start = offset + 1;
+      const end = Math.min(offset + 25, queryCount);
+      range = queryCount <= 25 ? `${queryCount}` : `${start}-${end}`;
+    }
+
+    return `${range} transactions`;
+  };
+
   useEffect(() => {
     executeQuery();
     executeCount();
@@ -328,12 +342,14 @@ const LatestTransactions = ({
                   <li
                     onClick={() => decreaseOffset()}
                     className={`${styles[`${theme}-left`]}`}
+                    data-testid="left-arrow"
                   >
                     <span aria-hidden="true">&#x2039;</span>
                   </li>
                   <li
                     onClick={() => increaseOffset()}
                     className={`${styles[`${theme}-right`]}`}
+                    data-testid="right-arrow"
                   >
                     <span aria-hidden="true">&#x203A;</span>
                   </li>
@@ -386,32 +402,15 @@ const LatestTransactions = ({
 
               {queryCount > 25 && (
                 <>
-                  {offset === 0 && (
-                    <>
-                      Latest{' '}
-                      <span className={`${styles[`${theme}-summary-number`]}`}>
-                        25 transactions
-                      </span>{' '}
-                      from a total of{' '}
-                      <span className={`${styles[`${theme}-summary-number`]}`}>
-                        {queryCount}
-                      </span>{' '}
-                      transactions
-                    </>
-                  )}
-                  {offset > 0 && (
-                    <>
-                      Latest{' '}
-                      <span className={`${styles[`${theme}-summary-number`]}`}>
-                        {offset}-{offset + 25} transactions
-                      </span>{' '}
-                      from a total of{' '}
-                      <span className={`${styles[`${theme}-summary-number`]}`}>
-                        {queryCount}
-                      </span>{' '}
-                      transactions
-                    </>
-                  )}
+                  Latest{' '}
+                  <span className={`${styles[`${theme}-summary-number`]}`}>
+                    {generateRangeText()}
+                  </span>{' '}
+                  from a total of{' '}
+                  <span className={`${styles[`${theme}-summary-number`]}`}>
+                    {queryCount}
+                  </span>{' '}
+                  transactions
                 </>
               )}
             </div>
@@ -423,26 +422,34 @@ const LatestTransactions = ({
                     <li
                       onClick={() => decreaseOffset()}
                       className={`${styles[`${theme}-left`]}`}
+                      data-testid="left-arrow"
                     >
                       <span aria-hidden="true">&#x2039;</span>
                     </li>
                   )}
                   {offset === 0 && (
-                    <li className={`${styles[`${theme}-left-grey`]}`}>
+                    <li
+                      className={`${styles[`${theme}-left-grey`]}`}
+                      data-testid="left-arrow"
+                    >
                       <span aria-hidden="true">&#x2039;</span>
                     </li>
                   )}
 
-                  {queryCount > 25 && (
+                  {offset + 25 < queryCount && (
                     <li
                       onClick={() => increaseOffset()}
                       className={`${styles[`${theme}-right`]}`}
+                      data-testid="right-arrow"
                     >
                       <span aria-hidden="true">&#x203A;</span>
                     </li>
                   )}
-                  {queryCount <= 25 && (
-                    <li className={`${styles[`${theme}-right-grey`]}`}>
+                  {offset + 25 >= queryCount && (
+                    <li
+                      className={`${styles[`${theme}-right-grey`]}`}
+                      data-testid="right-arrow"
+                    >
                       <span aria-hidden="true">&#x203A;</span>
                     </li>
                   )}
