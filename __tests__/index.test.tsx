@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
 import TimeAgo from 'javascript-time-ago';
@@ -14,6 +14,13 @@ import {
   TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
   TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
   TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+  FIFTY_ONE_TRANSACTIONS_CONTRACT_ADDRESS,
+  FIFTY_ONE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+  FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_ONE,
+  FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_TWO,
+  FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_THREE,
+  TransactionsCount,
+  TransactionsData,
 } from '../__mocks__/LatestTransactions';
 
 interface ExpectedCell {
@@ -21,9 +28,6 @@ interface ExpectedCell {
   href?: string;
   text: string;
 }
-
-// const BLOCKCHAINS = ['ethereum', 'polygon', 'goerli'];
-const BLOCKCHAINS = ['ethereum'];
 
 const HEADERS = [
   'Hash',
@@ -48,10 +52,10 @@ const blockchainCurrency: Record<string, string> = {
   goerli: 'GETH',
 };
 
-const mockFetchResponses = (responseData: any, countData: any) => {
-  fetchMock
-    .mockResponseOnce(JSON.stringify(responseData))
-    .mockResponseOnce(JSON.stringify(countData));
+const mockFetchResponses = (responses: any[]) => {
+  responses.forEach((response) =>
+    fetchMock.mockResponseOnce(JSON.stringify(response)),
+  );
 };
 
 const renderComponent = (
@@ -127,36 +131,62 @@ const validateTransactionData = (
   });
 };
 
+const navigateAndVerify = async (
+  direction: 'next' | 'prev',
+  expectedText: string,
+  expectedCalls: number,
+) => {
+  const buttonId = direction === 'next' ? 'right-arrow' : 'left-arrow';
+  const button = screen.getByTestId(buttonId);
+  userEvent.click(button);
+
+  await waitFor(() =>
+    expect(fetchMock.mock.calls.length).toEqual(expectedCalls),
+  );
+  await waitFor(() =>
+    expect(screen.getByText(expectedText)).toBeInTheDocument(),
+  );
+};
+
 describe('LatestTransactions', () => {
+  // Disable spurious act warnings
+  // Reference 1: https://github.com/facebook/react/pull/22561
+  // Reference 2: https://github.com/reactwg/react-18/discussions/102
+  // Reference 3: https://github.com/testing-library/react-testing-library/issues/1108
   beforeAll(() => {
-    // Disable spurious act warnings
-    // Reference 1: https://github.com/facebook/react/pull/22561
-    // Reference 2: https://github.com/reactwg/react-18/discussions/102
-    // Reference 3: https://github.com/testing-library/react-testing-library/issues/1108
     global.IS_REACT_ACT_ENVIRONMENT = false;
   });
 
-  beforeEach(() => {
+  afterEach(() => {
     fetchMock.resetMocks();
   });
 
   describe('Rendering and Data Fetching', () => {
     test('renders loading screen', () => {
-      mockFetchResponses(
+      mockFetchResponses([
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+      ]);
+
+      renderComponent(
+        'ethereum',
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
+        'test_key',
       );
-      renderComponent('ethereum', '0x1234', 'test_key');
       expect(screen.getByTestId('skeleton')).toBeInTheDocument();
     });
 
     test('fetches data', async () => {
-      mockFetchResponses(
+      mockFetchResponses([
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
-      );
+      ]);
 
-      renderComponent('ethereum', '0x1234', 'test_key');
+      renderComponent(
+        'ethereum',
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
+        'test_key',
+      );
 
       await waitFor(() => expect(fetchMock.mock.calls.length).toEqual(2));
       await waitFor(() =>
@@ -167,12 +197,16 @@ describe('LatestTransactions', () => {
     test('(Ethereum) renders transaction data table headers + rows', async () => {
       const blockchain = 'ethereum';
 
-      mockFetchResponses(
+      mockFetchResponses([
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
-      );
+      ]);
 
-      renderComponent(blockchain, '0x1234', 'test_key');
+      renderComponent(
+        blockchain,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
+        'test_key',
+      );
 
       await waitFor(() =>
         expect(screen.getByText('Latest transactions')).toBeInTheDocument(),
@@ -194,12 +228,16 @@ describe('LatestTransactions', () => {
     test('(Polygon) renders transaction data table headers + rows', async () => {
       const blockchain = 'polygon';
 
-      mockFetchResponses(
+      mockFetchResponses([
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
-      );
+      ]);
 
-      renderComponent(blockchain, '0x1234', 'test_key');
+      renderComponent(
+        blockchain,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
+        'test_key',
+      );
 
       await waitFor(() =>
         expect(screen.getByText('Latest transactions')).toBeInTheDocument(),
@@ -221,10 +259,10 @@ describe('LatestTransactions', () => {
     test('(Goerli) renders transaction data table headers + rows', async () => {
       const blockchain = 'goerli';
 
-      mockFetchResponses(
+      mockFetchResponses([
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
-      );
+      ]);
 
       renderComponent(blockchain, '0x1234', 'test_key');
 
@@ -248,10 +286,10 @@ describe('LatestTransactions', () => {
 
   describe('Validation and Error Handling', () => {
     test('shows "0 transactions" when given an invalid contract address', async () => {
-      mockFetchResponses(
+      mockFetchResponses([
         INVALID_CONTRACT_RECORDS_RESPONSE,
         INVALID_CONTRACT_COUNT_RESPONSE,
-      );
+      ]);
 
       renderComponent('ethereum', INVALID_CONTRACT_ADDRESS, 'test_key');
 
@@ -263,7 +301,7 @@ describe('LatestTransactions', () => {
 
     // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid Blockchain" when given an invalid blockchain', async () => {
-      mockFetchResponses('FILL_ME_IN', 'FILL_ME_IN');
+      mockFetchResponses(['FILL_ME_IN', 'FILL_ME_IN']);
 
       renderComponent('anthoneum', 'FILL_ME_IN', 'FILL_ME_IN');
 
@@ -275,7 +313,7 @@ describe('LatestTransactions', () => {
 
     // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid API Key" when given an invalid API Key', async () => {
-      mockFetchResponses('FILL_ME_IN', 'FILL_ME_IN');
+      mockFetchResponses(['FILL_ME_IN', 'FILL_ME_IN']);
 
       renderComponent('ethereum', 'FILL_ME_IN', 'FILL_ME_IN');
 
@@ -287,7 +325,7 @@ describe('LatestTransactions', () => {
 
     // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid API Server URL" when given an invalid API server URL', async () => {
-      mockFetchResponses('FILL_ME_IN', 'FILL_ME_IN');
+      mockFetchResponses(['FILL_ME_IN', 'FILL_ME_IN']);
 
       renderComponent('ethereum', 'FILL_ME_IN', 'FILL_ME_IN', 'FILL_ME_IN');
 
@@ -301,10 +339,10 @@ describe('LatestTransactions', () => {
   // WIP: Will resolve as I refactor the component
   xdescribe('Styling and Appearance', () => {
     test('background color of the table is white when "dark" mode is enabled', async () => {
-      mockFetchResponses(
+      mockFetchResponses([
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
-      );
+      ]);
 
       renderComponent(
         'ethereum',
@@ -319,10 +357,10 @@ describe('LatestTransactions', () => {
     });
 
     test('background color of the table is white when "light" mode is enabled', async () => {
-      mockFetchResponses(
+      mockFetchResponses([
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
-      );
+      ]);
 
       renderComponent(
         'ethereum',
@@ -339,33 +377,24 @@ describe('LatestTransactions', () => {
 
   // WIP: Fix pagination in the component and build out this test
   // TODO: Add a new Data and Count mock that has greater than 25 transactions
-  xdescribe('Pagination', () => {
+  describe('Pagination', () => {
     test('can navigate to next and previous page', async () => {
-      const nextPageData = [
-        /* Next page transaction data */
-      ];
-      const nextPageCount = 50; // Total transactions count for the next page
+      mockFetchResponses([
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_ONE,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_TWO,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_ONE,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_TWO,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_THREE,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_TWO,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_ONE,
+      ]);
 
-      const prevPageData = [
-        /* Previous page transaction data */
-      ];
-      const prevPageCount = 50; // Total transactions count for the previous page
-
-      // Mock response for the initial page
-      mockFetchResponses(
-        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
-        TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+      renderComponent(
+        'ethereum',
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_ADDRESS,
+        'test_key',
       );
-
-      // Mock response for the next page
-      fetchMock.mockResponseOnce(JSON.stringify(nextPageData));
-      fetchMock.mockResponseOnce(JSON.stringify(nextPageCount));
-
-      // Mock response for the previous page
-      fetchMock.mockResponseOnce(JSON.stringify(prevPageData));
-      fetchMock.mockResponseOnce(JSON.stringify(prevPageCount));
-
-      renderComponent('ethereum', '0x1234', 'test_key');
 
       // Initial page
       await waitFor(() => expect(fetchMock.mock.calls.length).toEqual(2));
@@ -373,37 +402,63 @@ describe('LatestTransactions', () => {
         expect(screen.getByText('25 transactions')).toBeInTheDocument(),
       );
 
-      // Next page
-      const nextButton = screen.getByRole('button', { name: 'Next' });
-      userEvent.click(nextButton);
+      // Navigate through the pages and verify
+      await navigateAndVerify('next', '26-50 transactions', 3);
+      await navigateAndVerify('prev', '25 transactions', 4);
+      await navigateAndVerify('next', '26-50 transactions', 5);
+      await navigateAndVerify('next', '51-51 transactions', 6);
+      await navigateAndVerify('prev', '26-50 transactions', 7);
+      await navigateAndVerify('prev', '25 transactions', 8);
+    });
 
-      await waitFor(() => expect(fetchMock.mock.calls.length).toEqual(4));
-      await waitFor(() =>
-        expect(screen.getByText('50 transactions')).toBeInTheDocument(),
+    test('stays on the first page if previous page button is clicked', async () => {
+      mockFetchResponses([
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_ONE,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+      ]);
+
+      renderComponent(
+        'ethereum',
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_ADDRESS,
+        'test_key',
       );
 
-      // Previous page
-      const prevButton = screen.getByRole('button', { name: 'Previous' });
-      userEvent.click(prevButton);
-
-      await waitFor(() => expect(fetchMock.mock.calls.length).toEqual(6));
+      // Initial page
+      await waitFor(() => expect(fetchMock.mock.calls.length).toEqual(2));
       await waitFor(() =>
         expect(screen.getByText('25 transactions')).toBeInTheDocument(),
       );
 
-      // Validate the transaction data for the previous and current page
-      const allCells = screen.getAllByRole('gridcell');
-      const expectedPrevPageValues = createExpectedValues(
+      // Try to navigate to the previous page
+      await navigateAndVerify('prev', '25 transactions', 2);
+    });
+
+    test('stays on the last page if next page button is clicked', async () => {
+      mockFetchResponses([
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_ONE,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_TWO,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_THREE,
+      ]);
+
+      renderComponent(
         'ethereum',
-        prevPageData,
-      );
-      const expectedCurrentPageValues = createExpectedValues(
-        'ethereum',
-        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
+        FIFTY_ONE_TRANSACTIONS_CONTRACT_ADDRESS,
+        'test_key',
       );
 
-      validateTransactionData(allCells, expectedPrevPageValues);
-      validateTransactionData(allCells, expectedCurrentPageValues);
+      // Initial page
+      await waitFor(() => expect(fetchMock.mock.calls.length).toEqual(2));
+      await waitFor(() =>
+        expect(screen.getByText('25 transactions')).toBeInTheDocument(),
+      );
+
+      // Navigate to the last page
+      await navigateAndVerify('next', '26-50 transactions', 3);
+      await navigateAndVerify('next', '51-51 transactions', 4);
+
+      // Try to navigate past the last page
+      await navigateAndVerify('next', '51-51 transactions', 4);
     });
   });
 });
