@@ -355,7 +355,7 @@ export const FIFTY_ONE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE = {
     query: FIFTY_ONE_TRANSACTIONS_CONTRACT_COUNT_SQL_QUERY,
     records: [
       {
-        count: '1790',
+        count: '51',
       },
     ],
     recordCount: 1,
