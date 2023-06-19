@@ -161,19 +161,6 @@ describe('LatestTransactions', () => {
     global.IS_REACT_ACT_ENVIRONMENT = false;
   });
 
-  // beforeEach(() => {
-  //   mockFetchResponses([
-  //     TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
-  //     TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
-  //   ]);
-
-  //   renderComponent(
-  //     'ethereum',
-  //     TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
-  //     'test_key',
-  //   );
-  // });
-
   afterEach(() => {
     fetchMock.resetMocks();
   });
