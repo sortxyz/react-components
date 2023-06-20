@@ -6,6 +6,7 @@ interface QueryPaginationArrowsProps {
   theme: string;
   offset: number;
   total: number;
+  loading: boolean;
   increaseOffset: () => void;
   decreaseOffset: () => void;
 }
@@ -14,11 +15,12 @@ const QueryPaginationArrows = ({
   theme,
   offset,
   total,
+  loading,
   increaseOffset,
   decreaseOffset,
 }: QueryPaginationArrowsProps) => {
-  const isLeftActive = offset > 0;
-  const isRightActive = offset + 25 < total;
+  const isLeftActive = !loading && offset > 0;
+  const isRightActive = !loading && offset + 25 < total;
 
   return (
     <div className={`${styles.pagination}`}>

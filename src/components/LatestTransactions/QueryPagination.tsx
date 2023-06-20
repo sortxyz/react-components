@@ -8,6 +8,7 @@ interface QueryPaginationProps {
   theme: string;
   offset: number;
   total: number;
+  loading: boolean;
   increaseOffset: () => void;
   decreaseOffset: () => void;
 }
@@ -16,6 +17,7 @@ const QueryPagination = ({
   offset,
   total,
   theme,
+  loading,
   increaseOffset,
   decreaseOffset,
 }: QueryPaginationProps) => {
@@ -26,6 +28,7 @@ const QueryPagination = ({
         offset={offset}
         total={total}
         theme={theme}
+        loading={loading}
         increaseOffset={increaseOffset}
         decreaseOffset={decreaseOffset}
       />
