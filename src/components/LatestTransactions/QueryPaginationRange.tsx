@@ -19,7 +19,7 @@ const generateRangeText = (offset, total) => {
     range = total <= 25 ? `${total}` : `${start}-${end}`;
   }
 
-  return `${range} transactions`;
+  return `${range}`;
 };
 
 const QueryPaginationRange = ({
@@ -29,25 +29,13 @@ const QueryPaginationRange = ({
 }: QueryPaginationRangeProps) => {
   const rangeText = generateRangeText(offset, total);
 
-  // if (total <= 25) {
-  //   return (
-  //     <div className={`${styles[`${theme}-summary-text`]}`}>
-  //       <span className={`${styles[`${theme}-summary-number`]}`}>
-  //         Latest transactions
-  //       </span>
-  //     </div>
-  //   );
-  // }
-
-  // if (total > 25) {
   return (
     <div className={`${styles[`${theme}-summary-text`]}`}>
       Latest{' '}
       <span className={`${styles[`${theme}-summary-number`]}`}>
         {rangeText}
       </span>{' '}
-      from a total of{' '}
-      <span className={`${styles[`${theme}-summary-number`]}`}>{total}</span>{' '}
+      of <span className={`${styles[`${theme}-summary-number`]}`}>{total}</span>{' '}
       transactions
     </div>
   );
