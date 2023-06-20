@@ -1,4 +1,4 @@
-export type TransactionRow = {
+export interface TransactionRow {
   hash: string;
   method: string;
   type: string;
@@ -7,4 +7,4 @@ export type TransactionRow = {
   from: string;
   to: string;
   value: string;
-};
+}

@@ -1,4 +1,3 @@
-// components/LatestTransactions.tsx
 import React from 'react';
 import DataGrid, { Column, RenderCellProps } from 'react-data-grid';
 import 'react-data-grid/lib/styles.css';
@@ -73,7 +72,6 @@ const LatestTransactions = ({
   theme = 'dark',
   enableVirtualization = true,
 }: LatestTransactionsProps) => {
-  console.log(`Theme: ${theme}`);
   const { offset, increaseOffset, decreaseOffset } = usePaginationOffset();
   const { rows, errorMsg, loading, queryCount } = useLatestTransactions(
     contract_address,
