@@ -23,7 +23,6 @@ const useLatestTransactions = (
   const [loading, setLoading] = useState<boolean>(false);
   const [queryCount, setQueryCount] = useState<number>(0);
 
-  // Function to execute count query
   const executeCountQuery = async () => {
     const query = `select count(*) from ${blockchain}.transaction t where t.to_address = '${contract_address.toLowerCase()}'`;
     const response = await fetch(`${api_server}/v1/queries/run`, {
@@ -39,7 +38,6 @@ const useLatestTransactions = (
     const responseJSON = await response.json();
     const data = responseJSON?.data;
 
-    // First, check for an error message
     if (responseJSON && responseJSON.code && responseJSON.code === 400) {
       return { error: responseJSON.message };
     }
@@ -52,7 +50,6 @@ const useLatestTransactions = (
     return { error: '0 results' };
   };
 
-  // Function to execute rows query
   const executeRowsQuery = async () => {
     const query = `select transaction_hash as hash, function as method, b.block_number, b.timestamp, t.from_address, t.to_address, t.value / 1e18 as value from ${blockchain}.transaction t, ${blockchain}.block b where to_address = '${contract_address.toLowerCase()}' and t.block_id = b.id order by b.block_number desc limit 25 offset ${offset}`;
     const response = await fetch(`${api_server}/v1/queries/run`, {
@@ -99,7 +96,6 @@ const useLatestTransactions = (
       try {
         setLoading(true);
 
-        // Execute the count
         const countResponse = await executeCountQuery();
 
         if (countResponse.error) {
@@ -108,7 +104,6 @@ const useLatestTransactions = (
           setQueryCount(countResponse.count);
         }
 
-        // Execute the query for rows
         const rowsResponse = await executeRowsQuery();
 
         if (rowsResponse.error) {
