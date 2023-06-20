@@ -162,10 +162,10 @@ describe('LatestTransactions', () => {
   });
 
   describe('Rendering and Data Fetching', () => {
-    xtest('renders loading screen', () => {
+    test('renders loading screen', () => {
       mockFetchResponses([
-        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_COUNT_RESPONSE,
+        TWENTY_FIVE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE,
       ]);
 
       renderComponent(
@@ -173,7 +173,7 @@ describe('LatestTransactions', () => {
         TWENTY_FIVE_TRANSACTIONS_CONTRACT_ADDRESS,
         'test_key',
       );
-      expect(screen.getByTestId('skeleton')).toBeInTheDocument();
+      expect(screen.getByTestId('loading')).toBeInTheDocument();
     });
 
     test('fetches data', async () => {

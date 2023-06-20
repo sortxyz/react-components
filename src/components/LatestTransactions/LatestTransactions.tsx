@@ -11,6 +11,7 @@ import useLatestTransactions from '../../hooks/useLatestTransactions';
 import usePaginationOffset from '../../hooks/usePaginationOffset';
 import ErrorBoundary from './ErrorBoundary';
 import QueryPagination from './QueryPagination';
+import LoaderGrid from './LoaderGrid';
 
 const columnProps = [
   { key: 'hash', name: 'Hash', route: 'tx' },
@@ -94,10 +95,15 @@ const LatestTransactions = ({
           theme={theme}
           offset={offset}
           total={queryCount}
+          loading={loading}
           increaseOffset={increaseOffset}
           decreaseOffset={decreaseOffset}
         />
-        <div style={{ width: '100%' }}>
+        {loading ? (
+          <div className={`${styles['spinner-container']}`}>
+            <LoaderGrid />
+          </div>
+        ) : (
           <DataGrid
             columns={columns}
             rows={rows}
@@ -111,8 +117,8 @@ const LatestTransactions = ({
             }}
             rowHeight={50}
           />
-          {errorMsg && <div>{errorMsg}</div>}
-        </div>
+        )}
+        {errorMsg && !loading && <div>{errorMsg}</div>}
       </ErrorBoundary>
       <div>
         <nav className={`${styles[`${theme}-view-component`]}`}>

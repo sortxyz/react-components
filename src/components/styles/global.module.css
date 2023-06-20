@@ -1,389 +1,397 @@
 .main-container {
-    width: 100%;
+  width: 100%;
+  min-height: 600px;
 }
 
 .summary {
-    margin: 0px 0px 50px 0px;
+  margin: 0px 0px 50px 0px;
 }
 
 .light-summary-text {
-    width: 70%;
-    float: left;
-    padding-top: 10px;
-    font-size: 18px;
-    text-align: left;
-    color: #000;
+  width: 70%;
+  float: left;
+  padding-top: 10px;
+  font-size: 18px;
+  text-align: left;
+  color: #000;
 }
 
 .dark-summary-text {
-    width: 70%;
-    float: left;
-    padding-top: 10px;
-    font-size: 18px;
-    text-align: left;
-    color: rgba(255, 255, 255, 0.5);
+  width: 70%;
+  float: left;
+  padding-top: 10px;
+  font-size: 18px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .light-summary-number {
-    color:#000;
-    font-weight: bold;
+  color: #000;
+  font-weight: bold;
 }
 .dark-summary-number {
-    color:#fff;
-    font-weight: bold;
+  color: #fff;
+  font-weight: bold;
 }
 
 .pagination {
-    width: 30%;
-    float: right;
+  width: 30%;
+  float: right;
 }
 
 .pagination .container {
-    display: flex;
-    justify-content: right;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: right;
+  margin-bottom: 20px;
 }
 
 .pagination .container .buttons {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 .pagination .container .buttons .light-left {
-    margin: 0 4px 0 1px;
-    border: 1px solid #000;
-    padding: 0px 15px 4px 15px;
-    font-size: 26px;
-    color: #000;
-    cursor: pointer;
+  margin: 0 4px 0 1px;
+  border: 1px solid #000;
+  padding: 0px 15px 4px 15px;
+  font-size: 26px;
+  color: #000;
+  cursor: pointer;
 }
 
 .pagination .container .buttons .light-left-grey {
-    margin: 0 4px 0 1px;
-    border: 1px solid grey;
-    padding: 0px 15px 4px 15px;
-    font-size: 26px;
-    color: grey;
+  margin: 0 4px 0 1px;
+  border: 1px solid grey;
+  padding: 0px 15px 4px 15px;
+  font-size: 26px;
+  color: grey;
 }
 
 .pagination .container .buttons .dark-left-grey {
-    margin: 0 4px 0 1px;
-    border: 1px solid grey;
-    padding: 0px 15px 4px 15px;
-    font-size: 26px;
-    color: grey;
+  margin: 0 4px 0 1px;
+  border: 1px solid grey;
+  padding: 0px 15px 4px 15px;
+  font-size: 26px;
+  color: grey;
 }
 
 .pagination .container .buttons .dark-left {
-    margin: 0 4px 0 1px;
-    border: 1px solid #FFF;
-    padding: 0px 15px 4px 15px;
-    font-size: 26px;
-    color: #fff;
-    cursor: pointer;
+  margin: 0 4px 0 1px;
+  border: 1px solid #fff;
+  padding: 0px 15px 4px 15px;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
 }
 
 .pagination .container .buttons .dark-left-grey {
-    margin: 0 4px 0 1px;
-    border: 1px solid grey;
-    padding: 0px 15px 4px 15px;
-    font-size: 26px;
-    color: grey;
+  margin: 0 4px 0 1px;
+  border: 1px solid grey;
+  padding: 0px 15px 4px 15px;
+  font-size: 26px;
+  color: grey;
 }
 
 .pagination .container .buttons .light-right {
-    margin: 0 1px;
-    border: 1px solid #000;
-    padding: 0px 15px;
-    font-size: 26px;
-    color: #000;
-    cursor: pointer;
+  margin: 0 1px;
+  border: 1px solid #000;
+  padding: 0px 15px;
+  font-size: 26px;
+  color: #000;
+  cursor: pointer;
 }
 .pagination .container .buttons .dark-right {
-    margin: 0 1px;
-    border: 1px solid #FFF;
-    padding: 0px 15px;
-    font-size: 26px;
-    color: #fff;
-    cursor: pointer;
+  margin: 0 1px;
+  border: 1px solid #fff;
+  padding: 0px 15px;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
 }
 .pagination .container .buttons .dark-right-grey {
-    margin: 0 1px;
-    border: 1px solid grey;
-    padding: 0px 15px;
-    font-size: 26px;
-    color: grey;
+  margin: 0 1px;
+  border: 1px solid grey;
+  padding: 0px 15px;
+  font-size: 26px;
+  color: grey;
 }
 
 .pagination .container .buttons .light-right-grey {
-    margin: 0 1px;
-    border: 1px solid grey;
-    padding: 0px 15px;
-    font-size: 26px;
-    color: grey;
+  margin: 0 1px;
+  border: 1px solid grey;
+  padding: 0px 15px;
+  font-size: 26px;
+  color: grey;
 }
 
 .dark-right-grey a:link {
-    text-decoration: none;
-    color: grey;
+  text-decoration: none;
+  color: grey;
 }
 .dark-right-grey a:visited {
-    text-decoration: none;
-    color: grey;
+  text-decoration: none;
+  color: grey;
 }
 .dark-right-grey a:active {
-    text-decoration: none;
-    color: grey;
+  text-decoration: none;
+  color: grey;
 }
 .light-right-grey a:link {
-    text-decoration: none;
-    color: grey;
+  text-decoration: none;
+  color: grey;
 }
 .light-right-grey a:visited {
-    text-decoration: none;
-    color: grey;
+  text-decoration: none;
+  color: grey;
 }
 .light-right-grey a:active {
-    text-decoration: none;
-    color: grey;
+  text-decoration: none;
+  color: grey;
 }
 
 .dark-right a:link {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 .dark-right a:visited {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 .dark-right a:active {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 .light-right a:link {
-    text-decoration: none;
-    color: #000 !important;
+  text-decoration: none;
+  color: #000 !important;
 }
 .light-right a:visited {
-    text-decoration: none;
-    color: #000 !important;
+  text-decoration: none;
+  color: #000 !important;
 }
 .light-right a:active {
-    text-decoration: none;
-    color: #000 !important;
+  text-decoration: none;
+  color: #000 !important;
 }
 
 .dark-left a:link {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 .dark-left a:visited {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 .dark-left a:active {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 .light-left a:link {
-    text-decoration: none;
-    color: #000;
+  text-decoration: none;
+  color: #000;
 }
 .light-left a:visited {
-    text-decoration: none;
-    color: #000;
+  text-decoration: none;
+  color: #000;
 }
 .light-left a:active {
-    text-decoration: none;
-    color: #000;
+  text-decoration: none;
+  color: #000;
 }
 
 .dark-view-component {
-    display: flex;
-    justify-content: right;
-    font-size: 18px;
+  display: flex;
+  justify-content: right;
+  font-size: 18px;
 }
 
 .light-view-component {
-    display: flex;
-    justify-content: right;
-    font-size: 18px;
+  display: flex;
+  justify-content: right;
+  font-size: 18px;
 }
 
 .light-view-component a:link {
-    color: #000 !important;
-    margin-top: 20px;
+  color: #000 !important;
+  margin-top: 20px;
 }
 
 .light-view-component a:visited {
-    color: #000 !important;
-    margin-top: 20px;
+  color: #000 !important;
+  margin-top: 20px;
 }
 
 .light-view-component a:active {
-    color: #000 !important;
-    margin-top: 20px;
+  color: #000 !important;
+  margin-top: 20px;
 }
 
 .dark-view-component a:link {
-    color: rgba(255, 255, 255, 0.5) !important;
-    margin-top: 20px;
+  color: rgba(255, 255, 255, 0.5) !important;
+  margin-top: 20px;
 }
 
 .dark-view-component a:visited {
-    color: rgba(255, 255, 255, 0.5) !important;
-    margin-top: 20px;
+  color: rgba(255, 255, 255, 0.5) !important;
+  margin-top: 20px;
 }
 
 .dark-view-component a:active {
-    color: rgba(255, 255, 255, 0.5) !important;
-    margin-top: 20px;
+  color: rgba(255, 255, 255, 0.5) !important;
+  margin-top: 20px;
 }
 
 .light-headerCell {
-    background-color: #fff !important;
-    color: black !important;
-    text-align: center;
-    border: 0px black;
-    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+  background-color: #fff !important;
+  color: black !important;
+  text-align: center;
+  border: 0px black;
+  border-bottom: 2px solid rgba(87, 92, 103, 0.3);
 }
 
 .dark-headerCell {
-    background-color: #0e1420;
-    text-align: center;
-    border: 0px black;
-    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
-    color: #fff !important;
-  }
+  background-color: #0e1420;
+  text-align: center;
+  border: 0px black;
+  border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+  color: #fff !important;
+}
 
 .light-colSpanClassname {
-    background-color: transparent;
-    color: black !important;
-    text-align: center;
-    border: 0px black;
-    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+  background-color: transparent;
+  color: black !important;
+  text-align: center;
+  border: 0px black;
+  border-bottom: 2px solid rgba(87, 92, 103, 0.3);
 }
 
 .dark-colSpanClassname {
-    background-color: transparent;
-    text-align: center;
-    border: 0px black;
-    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
-    color: #fff !important;
-  }
-
+  background-color: transparent;
+  text-align: center;
+  border: 0px black;
+  border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+  color: #fff !important;
+}
 
 .light-colSpanClassname a:link {
-    color: #000;
+  color: #000;
 }
 
 .light-colSpanClassname a:visited {
-    color: #000;
+  color: #000;
 }
 
 .light-colSpanClassname a:active {
-    color: #000;
+  color: #000;
 }
 
 .dark-colSpanClassname a:link {
-    color: #fff;
+  color: #fff;
 }
 
 .dark-colSpanClassname a:visited {
-    color: #fff;
+  color: #fff;
 }
 
 .dark-colSpanClassname a:active {
-    color: #fff;
+  color: #fff;
 }
 
-.light-colSpanClassname  a:hover {
-    color: #ceff00;
+.light-colSpanClassname a:hover {
+  color: #ceff00;
 }
 
-.dark-colSpanClassname  a:hover {
-    color: #ceff00;
+.dark-colSpanClassname a:hover {
+  color: #ceff00;
 }
 
 .light-methodSpanClassname {
-    background-color: transparent;
-    color: black;
-    text-align: center;
-    border: 0px black;
-    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+  background-color: transparent;
+  color: black;
+  text-align: center;
+  border: 0px black;
+  border-bottom: 2px solid rgba(87, 92, 103, 0.3);
 }
 
 .dark-methodSpanClassname {
-    background-color: transparent;
-    text-align: center;
-    border: 0px black;
-    border-bottom: 2px solid rgba(87, 92, 103, 0.3);
-    color: #fff;
-    background-color: rgba(87, 92, 103, 0.3);
+  background-color: transparent;
+  text-align: center;
+  border: 0px black;
+  border-bottom: 2px solid rgba(87, 92, 103, 0.3);
+  color: #fff;
+  background-color: rgba(87, 92, 103, 0.3);
 }
-  
+
 .skeleton {
-    animation: skeleton-loading 5s linear infinite alternate;
+  animation: skeleton-loading 5s linear infinite alternate;
 }
 
 @keyframes skeleton-loading {
-0% {
+  0% {
     background-color: rgba(87, 92, 103, 0.3);
-}
-100% {
+  }
+  100% {
     background-color: rgba(87, 92, 103, 0.3);
-}
+  }
 }
 
 .skeleton-text {
-    width: 100%;
-    height: 1.4rem;
-    border-radius: 0.25rem;
+  width: 100%;
+  height: 1.4rem;
+  border-radius: 0.25rem;
 }
 
 .skeleton-text__body {
-    width: 100%;
+  width: 100%;
 }
 
 .skeleton-footer {
-    width: 30%;
+  width: 30%;
 }
 
 .light-waiting {
-    color: #000;
-    padding-bottom: 10px;
+  color: #000;
+  padding-bottom: 10px;
 }
 
 .dark-waiting {
-    color: #fff;
-    padding-bottom: 10px;
+  color: #fff;
+  padding-bottom: 10px;
 }
 
 .light-waiting-image {
-    background-color: #000;
-    padding: 20px;
+  background-color: #000;
+  padding: 20px;
 }
 
 .dark-waiting-image {
-    padding: 20px;
+  padding: 20px;
 }
 
 .light-no-results {
-    text-align: center;
-    padding: 50px 0px;
-    font-style: italic;
-    background-color: rgba(87, 92, 103, 0.3);
-    margin: 20px 0px;
-    font-size: 18px;
+  text-align: center;
+  padding: 50px 0px;
+  font-style: italic;
+  background-color: rgba(87, 92, 103, 0.3);
+  margin: 20px 0px;
+  font-size: 18px;
 }
 
 .dark-no-results {
-    text-align: center;
-    padding: 50px 0px;
-    font-style: italic;
-    background-color: rgba(87, 92, 103, 0.3);
-    margin: 20px 0px;
-    font-size: 18px;
+  text-align: center;
+  padding: 50px 0px;
+  font-style: italic;
+  background-color: rgba(87, 92, 103, 0.3);
+  margin: 20px 0px;
+  font-size: 18px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 100%;
 }
