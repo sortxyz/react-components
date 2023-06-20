@@ -30,7 +30,7 @@ export interface LatestTransactionsProps {
   theme?: string;
 
   /**
-   * Toggle on/off virtualization in DataGrid component (from react-data-grid)
+   * Toggle on/off virtualization in DataGrid component, default to true
    */
   enableVirtualization?: boolean;
 }
