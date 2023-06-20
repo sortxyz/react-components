@@ -1,4 +1,3 @@
-// components/QueryPagination.tsx
 import React from 'react';
 import styles from '../styles/global.module.css';
 
@@ -9,17 +8,13 @@ interface QueryPaginationRangeProps {
 }
 
 const generateRangeText = (offset, total) => {
-  let range: string;
-
-  if (offset === 0) {
-    range = `${total <= 25 ? total : 25}`;
-  } else {
-    const start = offset + 1;
-    const end = Math.min(offset + 25, total);
-    range = total <= 25 ? `${total}` : `${start}-${end}`;
+  if (total === 0) {
+    return '0';
   }
 
-  return `${range}`;
+  const start = offset + 1;
+  const end = Math.min(offset + 25, total);
+  return `${start}-${end}`;
 };
 
 const QueryPaginationRange = ({
@@ -29,7 +24,9 @@ const QueryPaginationRange = ({
 }: QueryPaginationRangeProps) => {
   const rangeText = generateRangeText(offset, total);
 
-  return (
+  return total === 0 ? (
+    <div className={`${styles[`${theme}-summary-text`]}`}>0 transactions</div>
+  ) : (
     <div className={`${styles[`${theme}-summary-text`]}`}>
       Latest{' '}
       <span className={`${styles[`${theme}-summary-number`]}`}>
@@ -39,7 +36,6 @@ const QueryPaginationRange = ({
       transactions
     </div>
   );
-  // }
 };
 
 export default QueryPaginationRange;
