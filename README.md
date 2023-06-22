@@ -20,6 +20,12 @@ _Note: To use these components you'll need a [free Sort API key](https://docs.so
 npm install @sort/react-components
 ```
 
+or load from the [unpkg CDN](https://www.unpkg.com/):
+
+```html
+<script src="https://unpkg.com/@sort/react-components/lib/index.js"></script>
+```
+
 ## Components
 
 ### SQLQuery
