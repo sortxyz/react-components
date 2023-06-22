@@ -1,0 +1,28 @@
+.loaderGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.loaderGrid div {
+  margin: 1px;
+  height: 12px;
+  width: 12px;
+  background: #fff;
+  opacity: 0.3;
+}
+.loaderGrid div:first-of-type {
+  opacity: 1;
+}
+
+@media (max-width: 500px) {
+  .loaderGrid div {
+    width: 1.88rem;
+    height: 1.88rem;
+    margin: 0.032rem;
+  }
+} /*# sourceMappingURL=LoaderGrid.module.css.map */
