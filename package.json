@@ -11,6 +11,7 @@
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
     "prepublishOnly": "npm run build",
     "prepare": "husky install",
+    "semantic-release": "semantic-release",
     "test": "cross-env NODE_ENV=test jest",
     "test:clear": "cross-env NODE_ENV=test jest --clearCache",
     "test:cov": "npm run test -- --coverage",
@@ -82,6 +83,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-typescript2": "^0.29.0",
+    "semantic-release": "^21.0.5",
     "ts-jest": "^29.1.0",
     "typescript": "^4.9.5"
   },
