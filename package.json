@@ -11,6 +11,7 @@
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
     "prepublishOnly": "npm run build",
     "prepare": "husky install",
+    "semantic-release": "semantic-release",
     "test": "cross-env NODE_ENV=test jest",
     "test:clear": "cross-env NODE_ENV=test jest --clearCache",
     "test:cov": "npm run test -- --coverage",
