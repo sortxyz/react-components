@@ -395,3 +395,15 @@
   height: 600px;
   width: 100%;
 }
+
+.data-grid {
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar for IE and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.data-grid::-webkit-scrollbar {
+  display: none;
+}

@@ -109,6 +109,7 @@ const LatestTransactions = ({
             rows={rows}
             rowKeyGetter={(row: TransactionRow) => row.hash}
             enableVirtualization={enableVirtualization}
+            className={`${styles[`data-grid`]}`}
             style={{
               width: '100%',
               height,
