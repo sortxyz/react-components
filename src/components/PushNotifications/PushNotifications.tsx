@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import DataGrid from 'react-data-grid';
+import Pusher from 'pusher-js';
 import 'react-data-grid/lib/styles.css';
 import styles from '../styles/global.module.css';
-
-const Pusher = require('pusher-js');
 
 export interface PushNotificationsProps {
   /**

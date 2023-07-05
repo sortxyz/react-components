@@ -15,22 +15,16 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "noEmit": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "outDir": "lib",
     "declaration": true,
     "declarationDir": "lib",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true
   },
-  "include": [
-    "src",
-    "global.d.ts",
-    "jest.config.js",
-    "jest.setup.ts",
-    "__mocks__",
-    "__tests__"
-  ],
-  "exclude": ["node_modules", "lib"]
+  "include": ["src"],
+  "exclude": ["node_modules", "lib", "src/__mocks__/**/*", "src/**/*.test.ts"]
 }

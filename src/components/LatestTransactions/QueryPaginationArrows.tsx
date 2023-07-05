@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from '../styles/global.module.css';
 import QueryPaginationArrow from './QueryPaginationArrow';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import DataGrid, { Column, RenderCellProps } from 'react-data-grid';
 import 'react-data-grid/lib/styles.css';
 import { BLOCK_EXPLORER_BASE_URL } from 'src/constants';

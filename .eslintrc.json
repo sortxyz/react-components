@@ -12,7 +12,10 @@
     "airbnb/hooks",
     "airbnb-typescript",
     "plugin:jsx-a11y/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -21,16 +24,9 @@
     },
     "ecmaVersion": 2020,
     "sourceType": "module",
-    "tsconfigRootDir": "./tsconfig.json",
-    "project": true
+    "tsconfigRootDir": ".",
+    "project": ["./tsconfig.eslint.json"]
   },
-  "plugins": [
-    "react",
-    "react-hooks",
-    "@typescript-eslint",
-    "jsx-a11y",
-    "prettier"
-  ],
   "rules": {
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-unused-vars": "off",

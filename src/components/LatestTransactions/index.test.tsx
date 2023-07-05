@@ -1,11 +1,10 @@
-import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
 import TimeAgo from 'javascript-time-ago';
 
-import LatestTransactions from '../src/components/LatestTransactions';
+import LatestTransactions from '.';
 
 import {
   INVALID_CONTRACT_ADDRESS,
@@ -19,9 +18,9 @@ import {
   FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_ONE,
   FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_TWO,
   FIFTY_ONE_TRANSACTIONS_CONTRACT_RECORDS_RESPONSE_PAGE_THREE,
-  TransactionsCount,
   TransactionsData,
-} from '../__mocks__/LatestTransactions';
+  TransactionsCount,
+} from '../../__mocks__/LatestTransactions';
 
 interface ExpectedCell {
   type: 'link' | 'text';
@@ -52,7 +51,9 @@ const blockchainCurrency: Record<string, string> = {
   goerli: 'GETH',
 };
 
-const mockFetchResponses = (responses: any[]) => {
+const mockFetchResponses = (
+  responses: (TransactionsData | TransactionsCount)[],
+) => {
   responses.forEach((response) =>
     fetchMock.mockResponseOnce(JSON.stringify(response)),
   );
@@ -77,12 +78,12 @@ const renderComponent = (
 
 const createExpectedValues = (
   blockchain: string,
-  transactionData: any,
+  transactionsData: TransactionsData,
 ): ExpectedCell[][] => {
   // Create formatter (English)
   const timeAgo = new TimeAgo('en-US');
 
-  return transactionData.data.records.map((record) => [
+  return transactionsData.data.records.map((record) => [
     {
       type: 'link',
       href: `${blockExplorerURL[blockchain]}/tx/${record.hash}`,
@@ -293,8 +294,8 @@ describe('LatestTransactions', () => {
       );
     });
 
-    // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid Blockchain" when given an invalid blockchain', async () => {
+      // @ts-expect-error - TODO: This error handling doesn't exist in the component yet
       mockFetchResponses(['FILL_ME_IN', 'FILL_ME_IN']);
 
       renderComponent('anthoneum', 'FILL_ME_IN', 'FILL_ME_IN');
@@ -305,8 +306,8 @@ describe('LatestTransactions', () => {
       );
     });
 
-    // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid API Key" when given an invalid API Key', async () => {
+      // @ts-expect-error TODO: This error handling doesn't exist in the component yet
       mockFetchResponses(['FILL_ME_IN', 'FILL_ME_IN']);
 
       renderComponent('ethereum', 'FILL_ME_IN', 'FILL_ME_IN');
@@ -317,8 +318,8 @@ describe('LatestTransactions', () => {
       );
     });
 
-    // TODO: This error handling doesn't exist in the component yet
     xtest('shows "Invalid API Server URL" when given an invalid API server URL', async () => {
+      // @ts-expect-error TODO: This error handling doesn't exist in the component yet
       mockFetchResponses(['FILL_ME_IN', 'FILL_ME_IN']);
 
       renderComponent('ethereum', 'FILL_ME_IN', 'FILL_ME_IN', 'FILL_ME_IN');
