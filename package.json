@@ -57,7 +57,6 @@
     "@types/react-dom": "18.2.6",
     "@typescript-eslint/eslint-plugin": "5.61.0",
     "@typescript-eslint/parser": "5.61.0",
-    "babel-loader": "9.1.2",
     "cross-env": "7.0.3",
     "deep-equal": "2.2.1",
     "eslint": "8.44.0",
@@ -77,7 +76,6 @@
     "lint-staged": "13.2.3",
     "postcss": "8.4.24",
     "prettier": "2.8.8",
-    "relative-deps": "1.0.7",
     "rollup": "3.26.1",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.2",
@@ -94,5 +92,8 @@
   "bugs": {
     "url": "https://github.com/sortxyz/react-components/issues"
   },
-  "homepage": "https://github.com/sortxyz/react-components"
+  "homepage": "https://github.com/sortxyz/react-components",
+  "release": {
+    "branches": ["main"]
+  }
 }
