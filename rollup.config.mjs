@@ -11,6 +11,7 @@ import typescriptEngine from 'typescript';
 import pkg from './package.json' assert { type: 'json' };
 
 const config = {
+  external: ['pusher-js'],
   input: './src/index.ts',
   output: [
     {
@@ -31,9 +32,7 @@ const config = {
       plugins: [],
       minimize: true,
     }),
-    external({
-      includeDependencies: true,
-    }),
+    external(),
     typescript({
       tsconfig: './tsconfig.json',
       typescript: typescriptEngine,
