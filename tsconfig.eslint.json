@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src",  "src/__mocks__/**/*", "src/**/*.test.ts", "jest.config.js"],
+  "exclude": ["node_modules", "lib"]
+}
