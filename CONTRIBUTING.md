@@ -60,10 +60,37 @@ this step easier.
 
 3. Create a working branch and start with your changes!
 
-### Commit your update
+#### Test your change
 
-Commit the changes once you are happy with them. Review your changes yourself
-before opening a pull request to speed up the review process :zap:.
+Test your changes before committing them.
+
+##### Run a local build
+
+```bash
+npm run build
+```
+
+##### Link the package
+
+```bash
+# do this in this repo
+npm run link
+```
+
+##### Link the package in your project
+
+```bash
+# do this in your project
+npm run link @sort/react-components
+```
+
+#### Prepare for release
+
+If everything works as expected, go ahead and make the commit.
+
+#### How to write commits
+
+We use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), if you're not familiar with it, please take a look as it will determine the type of release that is created.
 
 ### Pull Request
 
@@ -87,5 +114,5 @@ merge conflicts and other issues.
 
 ### Your PR is merged!
 
-Congratulations :tada::tada: You are now part of the Sort develop community. The
+Congratulations :tada::tada: You are now part of the Sort development community. The
 Sort team thanks you :sparkles:.
