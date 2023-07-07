@@ -1,7 +1,7 @@
 # [sort.xyz](https://sort.xyz) react components
 
 > 🧪 This project is currently in ALPHA which means you can expect bugs and API
-> changes.  
+> changes.
 > Feedback? Let us know by [opening an issue](https://github.com/sortxyz/react-components/issues).
 
 ---
@@ -100,34 +100,4 @@ vulnerabilities.
 
 ## Contributing
 
-
-### Test your change
-
-#### Run a local build
-
-```bash
-npm run build
-```
-
-#### Link the package
-
-```bash
-# do this in this repo
-npm run link
-```
-
-#### Link the package in your project
-
-```bash
-# do this in your project
-npm run link @sort/react-components
-```
-
-### Prepare for release
-
-if everything works as expected, go ahead and make the commit
-
-
-#### How to write commits
-
-We use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), if you're not familiar with it, please take a look as it will determine the type of release that is created.
+See [CONTRIBUTING](./CONTRIBUTING.md)
