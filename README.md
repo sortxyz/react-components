@@ -1,10 +1,10 @@
-# [sort.xyz](https://sort.xyz) react components
+# DEPRECATED
 
-> 🧪 This project is currently in ALPHA which means you can expect bugs and API
-> changes.
-> Feedback? Let us know by [opening an issue](https://github.com/sortxyz/react-components/issues).
+> ⚠️   This package is no longer maintained.
 
 ---
+
+# [sort.xyz](https://sort.xyz) react components
 
 React components created to simplify web3 UI application development.
 
